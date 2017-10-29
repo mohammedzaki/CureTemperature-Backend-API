@@ -1,0 +1,974 @@
+swagger: '2.0'
+info:
+  description: Elagy APIs
+  version: 1.0.0
+  title: Elagy
+  contact:
+    email: mohammed.zaki@eye-ltd.com
+host: elagy.localhost
+basePath: /api/v1
+tags:
+  - name: Login
+    description: /api/v1/apiLogin
+  - name: UserProfile
+    description: /api/v1/register
+  - name: Pharmcy
+    description: Operation about pharmcies
+  - name: Patient
+    description: Operation about patients
+  - name: VerifyPatient
+    description: Operation code patients
+  - name: VerifyPharmcy
+    description: Operation code pharmcy
+  - name: Type
+    description: insert contact data
+  - name: Contact
+    description: contact data
+  - name: History
+    description: Operation about patient History
+  - name: Imaging
+    description: Operation about patient Imaging
+  - name: LabAssessments
+    description: Operation about patient LabAssessments
+  - name: Transfusion
+    description: Operation about patient Transfusion
+  - name: Treatment
+    description: Operation about patient Treatment
+  - name: Visit
+    description: Operation about patient Visit
+  - name: Intervention
+    description: Operation about patient Intervention
+  - name: Complication
+    description: Operation about patient Complication
+  - name: Followup
+    description: Operation about patient Followup
+  - name: Search
+    description: Operation about search on patient
+  - name: Reports
+    description: Operation about getting data for patient reports
+schemes:
+  - http
+paths:
+  /apiLogin:
+    post:
+      tags:
+        - Login
+      summary: login to system
+      description: login
+      operationId: apiLogin
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: userLoginData
+          description: user Login Data
+          required: true
+          schema:
+            $ref: '#/definitions/LoginData'
+      responses:
+        '201':
+          description: successful operation patient created
+          schema:
+            $ref: '#/definitions/SuccessResponse'
+        '401':
+          description: Unauthenticated Error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '422':
+          description: The given data failed to pass validation.
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '500':
+          description: internal server error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '501':
+          description: not implented
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+  /UserProfile:
+    post:
+      tags:
+      - UserProfile
+      summary: Register to system
+      description: Register
+      operationId: Registeration
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: userRegisterData
+          description: user Register Data
+          required: true
+          schema:
+            $ref: '#/definitions/RegisterData'
+      security:
+        - elagy_auth2: []
+      responses:
+        '201':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/SuccessResponse'
+        '401':
+          description: Unauthenticated Error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '422':
+          description: The given data failed to pass validation.
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '500':
+          description: internal server error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '501':
+          description: not implented
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+
+  /pharmcy:
+    post:
+      tags:
+        - Pharmcy
+      summary: Create new pharmcy
+      description: This can only be done by the logged in user.
+      operationId: createPharmcy
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: pharmcy
+          description: Created pharmcy object
+          required: true
+          schema:
+            $ref: '#/definitions/Pharmcy'
+      security:
+        - elagy_auth2: []
+      responses:
+        '201':
+          description: successful operation pharmcy created
+          schema:
+            $ref: '#/definitions/SuccessResponse'
+        '401':
+          description: Unauthenticated Error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '422':
+          description: The given data failed to pass validation.
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '500':
+          description: internal server error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '501':
+          description: not implented
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+    get:
+      tags:
+        - Pharmcy
+      summary: Get all pharmcies
+      description: This can only be done by the logged in user.
+      operationId: getAllPharmcy
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: userId
+          description: current user email
+          required: true
+          type: string
+      security:
+        - elagy_auth2: []
+      responses:
+        '201':
+          description: successful operation pharmcy created
+          schema:
+            $ref: '#/definitions/SuccessResponse'
+        '401':
+          description: Unauthenticated Error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '422':
+          description: The given data failed to pass validation.
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '500':
+          description: internal server error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '501':
+          description: not implented
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+  '/pharmcy/{pharmcyId}':
+    put:
+      tags:
+        - Pharmcy
+      summary: update patient
+      description: This can only be done by the logged in user.
+      operationId: updatePatient
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: pharmcy
+          description: pharmcy data object
+          required: true
+          schema:
+            $ref: '#/definitions/Pharmcy'
+        - in: path
+          name: pharmcyId
+          type: integer
+          description: pharmcy resource id
+          required: true
+      security:
+        - elagy_auth2: []
+      responses:
+        '202':
+          description: successful operation pharmcy updated
+          schema:
+            $ref: '#/definitions/SuccessResponse'
+        '401':
+          description: Unauthenticated Error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '422':
+          description: The given data failed to pass validation.
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '500':
+          description: internal server error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '501':
+          description: not implented
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+    get:
+      tags:
+        - Pharmcy
+      summary: get pharmcy data
+      description: This can only be done by the logged in user.
+      operationId: getPharmcy
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: pharmcyId
+          type: integer
+          description: pharmcy resource id
+          required: true
+      security:
+        - elagy_auth2: []
+      responses:
+        '200':
+          description: ok
+          schema:
+            $ref: '#/definitions/SuccessResponse'
+        '401':
+          description: Unauthenticated Error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '500':
+          description: internal server error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '501':
+          description: not implented
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+    delete:
+      tags:
+        - Pharmcy
+      summary: get pharmcy data
+      description: This can only be done by the logged in user.
+      operationId: deletePharmcy
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: pharmcyId
+          type: integer
+          description: pharmcy resource id
+          required: true
+      security:
+        - elagy_auth2: []
+      responses:
+        '200':
+          description: pharmcy deleted successfully
+          schema:
+            $ref: '#/definitions/SuccessResponse'
+        '401':
+          description: Unauthenticated Error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '500':
+          description: internal server error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '501':
+          description: not implented
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+  /patient:
+    post:
+      tags:
+        - Patient
+      summary: Create new patient
+      description: This can only be done by the logged in user.
+      operationId: createPatient
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: patient
+          description: Created patient object
+          required: true
+          schema:
+            $ref: '#/definitions/Patient'
+      security:
+        - elagy_auth2: []
+      responses:
+        '201':
+          description: successful operation patient created
+          schema:
+            $ref: '#/definitions/SuccessResponse'
+        '401':
+          description: Unauthenticated Error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '422':
+          description: The given data failed to pass validation.
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '500':
+          description: internal server error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '501':
+          description: not implented
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+    get:
+      tags:
+        - Patient
+      summary: Get all patients
+      description: This can only be done by the logged in user.
+      operationId: getAllPatient
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: userId
+          description: current user email
+          required: true
+          type: string
+      security:
+        - elagy_auth2: []
+      responses:
+        '201':
+          description: successful operation patient created
+          schema:
+            $ref: '#/definitions/SuccessResponse'
+        '401':
+          description: Unauthenticated Error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '422':
+          description: The given data failed to pass validation.
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '500':
+          description: internal server error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '501':
+          description: not implented
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+  '/patient/{patientId}':
+    put:
+      tags:
+        - Patient
+      summary: update patient
+      description: This can only be done by the logged in user.
+      operationId: updatePharmcy
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: patient
+          description: patient data object
+          required: true
+          schema:
+            $ref: '#/definitions/Patient'
+        - in: path
+          name: patientId
+          type: integer
+          description: patient resource id
+          required: true
+      security:
+        - elagy_auth2: []
+      responses:
+        '202':
+          description: successful operation patient updated
+          schema:
+            $ref: '#/definitions/SuccessResponse'
+        '401':
+          description: Unauthenticated Error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '422':
+          description: The given data failed to pass validation.
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '500':
+          description: internal server error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '501':
+          description: not implented
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+    get:
+      tags:
+        - Patient
+      summary: get patient data
+      description: This can only be done by the logged in user.
+      operationId: getPatient
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: patientId
+          type: integer
+          description: patient resource id
+          required: true
+      security:
+        - elagy_auth2: []
+      responses:
+        '200':
+          description: ok
+          schema:
+            $ref: '#/definitions/SuccessResponse'
+        '401':
+          description: Unauthenticated Error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '500':
+          description: internal server error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '501':
+          description: not implented
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+    delete:
+      tags:
+        - Patient
+      summary: get patient data
+      description: This can only be done by the logged in user.
+      operationId: deletePatient
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: patientId
+          type: integer
+          description: patient resource id
+          required: true
+      security:
+        - elagy_auth2: []
+      responses:
+        '200':
+          description: patient deleted successfully
+          schema:
+            $ref: '#/definitions/SuccessResponse'
+        '401':
+          description: Unauthenticated Error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '500':
+          description: internal server error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '501':
+          description: not implented
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+  /ckeckToken:
+            $ref: '#/definitions/ExceptionResponse'
+  '/ckeckToken/{ckeckToken}':
+    get:
+      tags:
+        - VerifyPatient
+      summary: get patient data
+      description: This can only be done by the logged in user.
+      operationId: getPatientCode
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: ckeckToken
+          type: string
+          description: token
+          required: true
+      security:
+        - elagy_auth2: []
+      responses:
+        '200':
+          description: ok
+          schema:
+            $ref: '#/definitions/SuccessResponse'
+        '401':
+          description: Unauthenticated Error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '500':
+          description: internal server error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '501':
+          description: not implented
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+  /ckeckTokenPharmcy:
+            $ref: '#/definitions/ExceptionResponse'
+  '/ckeckTokenPharmcy/{ckeckTokenPharmcy}':
+    get:
+      tags:
+        - VerifyPharmcy
+      summary: get patient data
+      description: This can only be done by the logged in user.
+      operationId: getPharmcyCode
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: ckeckTokenPharmcy
+          type: string
+          description: token
+          required: true
+      security:
+        - elagy_auth2: []
+      responses:
+        '200':
+          description: ok
+          schema:
+            $ref: '#/definitions/SuccessResponse'
+        '401':
+          description: Unauthenticated Error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '500':
+          description: internal server error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '501':
+          description: not implented
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+  /types:
+    post:
+      tags:
+      - Type
+      summary: create new contact data
+      description: type contact
+      operationId: createData
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: Name of data
+          description: data
+          required: true
+          schema:
+            $ref: '#/definitions/typeData'
+      security:
+        - elagy_auth2: []
+      responses:
+        '201':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/SuccessResponse'
+        '401':
+          description: Unauthenticated Error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '422':
+          description: The given data failed to pass validation.
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '500':
+          description: internal server error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '501':
+          description: not implented
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+  /contact:
+    post:
+      tags:
+        - Contact
+      summary: Create new contact
+      description: This can only be done by the logged in user.
+      operationId: createContact
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          description: Created contact object
+          required: true
+          schema:
+            $ref: '#/definitions/ContactData'
+      security:
+        - elagy_auth2: []
+      responses:
+        '201':
+          description: successful operation contact created
+          schema:
+            $ref: '#/definitions/SuccessResponse'
+        '401':
+          description: Unauthenticated Error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '422':
+          description: The given data failed to pass validation.
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '500':
+          description: internal server error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '501':
+          description: not implented
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+    get:
+      tags:
+        - Contact
+      summary: Get all contacts
+      description: This can only be done by the logged in user.
+      operationId: getAllContact
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: userId
+          description: current user email
+          required: true
+          type: string
+      security:
+        - elagy_auth2: []
+      responses:
+        '201':
+          description: successful operation patient created
+          schema:
+            $ref: '#/definitions/SuccessResponse'
+        '401':
+          description: Unauthenticated Error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '422':
+          description: The given data failed to pass validation.
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '500':
+          description: internal server error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '501':
+          description: not implented
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+  '/contact/{contact}':
+    put:
+      tags:
+        - Contact
+      summary: update contact
+      description: This can only be done by the logged in user.
+      operationId: updateContact
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          description: contact data object
+          required: true
+          schema:
+            $ref: '#/definitions/ContactData'
+        - in: path
+          name: contact
+          type: integer
+          description: contact resource id
+          required: true
+      security:
+        - elagy_auth2: []
+      responses:
+        '202':
+          description: successful operation contact updated
+          schema:
+            $ref: '#/definitions/SuccessResponse'
+        '401':
+          description: Unauthenticated Error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '422':
+          description: The given data failed to pass validation.
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '500':
+          description: internal server error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '501':
+          description: not implented
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+    get:
+      tags:
+        - Contact
+      summary: get contact data
+      description: This can only be done by the logged in user.
+      operationId: getContact
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: contact
+          type: integer
+          description: contact resource id
+          required: true
+      security:
+        - elagy_auth2: []
+      responses:
+        '200':
+          description: ok
+          schema:
+            $ref: '#/definitions/SuccessResponse'
+        '401':
+          description: Unauthenticated Error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '500':
+          description: internal server error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '501':
+          description: not implented
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+    delete:
+      tags:
+        - Contact
+      summary: get contact data
+      description: This can only be done by the logged in user.
+      operationId: deleteContact
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: contact
+          type: integer
+          description: contact resource id
+          required: true
+      security:
+        - elagy_auth2: []
+      responses:
+        '200':
+          description: contact deleted successfully
+          schema:
+            $ref: '#/definitions/SuccessResponse'
+        '401':
+          description: Unauthenticated Error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '500':
+          description: internal server error
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+        '501':
+          description: not implented
+          schema:
+            $ref: '#/definitions/ExceptionResponse'
+securityDefinitions:
+  elagy_auth2:
+    type: oauth2
+    tokenUrl: 'http://elagy.localhost/oauth/token'
+    description: >-
+      client_id: 1 </br> tokenURL: VdSF2RMo5xg7roelnZKM7xRl0lm0NQxoz6ec1y1Z
+      </br> email: mohammedzaki.dev@gmail.com </br> password: 123456
+    flow: password
+    scopes:
+      'write:pets': modify pets in your account
+      'read:pets': read your pets
+definitions:
+  ExceptionResponse:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      exception:
+        type: string
+      message:
+        type: string
+      errors:
+        type: string
+      trace:
+        type: string
+  SuccessResponse:
+    type: object
+    properties:
+      success:
+        type: boolean
+      message:
+        type: string
+      returnObject:
+        type: object
+      objectType:
+        type: string
+  LoginData:
+    type: object
+    properties:
+      grant_type:
+        type: string
+        default: password
+      client_id:
+        type: string
+        default: '6'
+      client_secret:
+        type: string
+        default: 6QS7jQWrxEIA9B2SwC79ZHIKieyzgX5ZiyNaP0x1
+      username:
+        type: string
+        default: cl_user01@eye-ltd.com
+      password:
+        type: string
+        default: cl_user01
+  User:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      email:
+        type: string
+      username:
+        type: string
+      password:
+        type: string
+      remember_token:
+        type: string
+      access_token:
+        type: string
+      expires_in:
+        type: string
+      refresh_token:
+        type: string
+      token_type:
+        type: string
+  Patient:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      birthDate:
+        type: string
+        format: date
+        example: 2001-02-02
+      birthPlace:
+        type: string
+      city:
+        type: string
+      userId:
+        type: integer
+  Pharmcy:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      city:
+        type: string
+      userId:
+        type: integer
+  RegisterData:
+    type: object
+    properties:
+      name:
+        type: string
+      birthDate:
+        type: string
+        format: date
+        example: 2001-02-02
+      birthPlace:
+        type: string
+      city:
+        type: string
+      userId:
+        type: integer
+      userType:
+        type: integer
+  typeData:
+    type: object
+    properties:
+      name:
+        type: string
+  ContactData:
+    type: object
+    properties:
+      data:
+        type: string
+      userId:
+        type: integer
+      typeId:
+        type: integer

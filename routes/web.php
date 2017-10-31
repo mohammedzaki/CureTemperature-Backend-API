@@ -13,8 +13,4 @@
 
 Auth::routes();
 
-Route::match(['get', 'post'], 'register', function(){
-    abort(404);
-});
-
 Route::get('/home', 'HomeController@index');

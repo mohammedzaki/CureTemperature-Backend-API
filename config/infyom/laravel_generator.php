@@ -33,9 +33,9 @@ return [
 
         'test_trait'        => base_path('tests/Unit/traits/'),
 
-        'repository_test'   => base_path('tests/Unit'),
+        'repository_test'   => base_path('tests/Unit/'),
 
-        'api_test'          => base_path('tests/Unit'),
+        'api_test'          => base_path('tests/Unit/'),
 
         'views'             => base_path('resources/views/'),
 

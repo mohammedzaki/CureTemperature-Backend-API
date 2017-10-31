@@ -31,11 +31,11 @@ return [
 
         'api_controller'    => app_path('Http/Controllers/API/'),
 
-        'test_trait'        => base_path('tests/traits/'),
+        'test_trait'        => base_path('tests/Unit/traits/'),
 
-        'repository_test'   => base_path('tests/'),
+        'repository_test'   => base_path('tests/Unit'),
 
-        'api_test'          => base_path('tests/'),
+        'api_test'          => base_path('tests/Unit'),
 
         'views'             => base_path('resources/views/'),
 

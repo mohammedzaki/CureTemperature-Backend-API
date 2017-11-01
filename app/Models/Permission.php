@@ -2,8 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Zizaco\Entrust\EntrustPermission;
 
 /**
  * App\Models\Permission
@@ -53,18 +52,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Permission withoutTrashed()
  * @mixin \Eloquent
  */
-class Permission extends Model
-{
-    use SoftDeletes;
+class Permission extends EntrustPermission {
 
     public $table = 'permissions';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
-
-
-    protected $dates = ['deleted_at'];
-
 
     public $fillable = [
         'name',
@@ -78,10 +71,10 @@ class Permission extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer',
-        'name' => 'string',
+        'id'           => 'integer',
+        'name'         => 'string',
         'display_name' => 'string',
-        'description' => 'string'
+        'description'  => 'string'
     ];
 
     /**
@@ -90,14 +83,13 @@ class Permission extends Model
      * @var array
      */
     public static $rules = [
-        
     ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     **/
-    public function roles()
-    {
+     * */
+    public function roles() {
         return $this->belongsToMany(\App\Models\Role::class, 'permission_role');
     }
+
 }

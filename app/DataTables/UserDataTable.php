@@ -66,9 +66,9 @@ class UserDataTable extends DataTable
         return [
             'name',
             'email',
-            'password',
-            'remember_token',
-            'device_token'
+            //'password',
+            //'remember_token',
+            //'device_token'
         ];
     }
 

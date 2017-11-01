@@ -49,6 +49,8 @@ class UserController extends AppBaseController {
     public function store(CreateUserRequest $request) {
         $input = $request->all();
 
+        $input['password'] = bcrypt($input['password']);
+
         $user = $this->userRepository->create($input);
 
         Flash::success('User saved successfully.');
@@ -111,7 +113,12 @@ class UserController extends AppBaseController {
             return redirect(route('users.index'));
         }
 
-        $user = $this->userRepository->update($request->all(), $id);
+        $input = $request->all();
+        if (!empty($input['password'])) {
+            $input['password'] = bcrypt($input['password']);
+        }
+        
+        $user = $this->userRepository->update($input, $id);
 
         Flash::success('User updated successfully.');
 

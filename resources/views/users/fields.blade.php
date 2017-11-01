@@ -16,18 +16,6 @@
     {!! Form::password('password', ['class' => 'form-control']) !!}
 </div>
 
-<!-- Remember Token Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('remember_token', 'Remember Token:') !!}
-    {!! Form::text('remember_token', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Device Token Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('device_token', 'Device Token:') !!}
-    {!! Form::text('device_token', null, ['class' => 'form-control']) !!}
-</div>
-
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}

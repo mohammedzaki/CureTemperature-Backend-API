@@ -5,6 +5,7 @@ namespace App\Models;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Models\User
@@ -36,17 +37,78 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereUsername($value)
  * @mixin \Eloquent
+ * @SWG\Definition(
+ *      definition="User",
+ *      required={""},
+ *      @SWG\Property(
+ *          property="id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="name",
+ *          description="name",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="email",
+ *          description="email",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="password",
+ *          description="password",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="remember_token",
+ *          description="remember_token",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="device_token",
+ *          description="device_token",
+ *          type="string"
+ *      )
+ * )
  */
 class User extends Authenticatable {
 
     use HasApiTokens,
-        Notifiable;
+        Notifiable,
+        SoftDeletes;
 
     /**
      * Generated
      */
     protected $table = 'users';
-    protected $fillable = ['id', 'name', 'email', 'username', 'password', 'remember_token', 'hospitalId'];
+
+    const CREATED_AT = 'created_at';
+    const UPDATED_AT = 'updated_at';
+
+    protected $dates = ['deleted_at'];
+    public $fillable = [
+        'name',
+        'email',
+        'password',
+        'remember_token',
+        'device_token'
+    ];
+
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'id'             => 'integer',
+        'name'           => 'string',
+        'email'          => 'string',
+        'password'       => 'string',
+        'remember_token' => 'string',
+        'device_token'   => 'string'
+    ];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -57,24 +119,26 @@ class User extends Authenticatable {
         'password', 'remember_token',
     ];
 
-    public function hospital() {
-        return $this->belongsTo(\App\Models\Hospital::class, 'hospitalId', 'id');
-    }
+    /**
+     * Validation rules
+     *
+     * @var array
+     */
+    public static $rules = [
+    ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * */
     public function roles() {
-        return $this->belongsToMany(\App\Models\Role::class, 'role_user', 'user_id', 'role_id');
+        return $this->belongsToMany(\App\Models\Role::class, 'role_user');
     }
 
-    public function roleUsers() {
-        return $this->hasMany(\App\Models\RoleUser::class, 'user_id', 'id');
-    }
-
-    public function patients() {
-        return $this->hasMany(\App\Models\Patient::class);
-    }
-
-    public function pharmcies() {
-        return $this->hasMany(\App\Models\Pharmcy::class);
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * */
+    public function userDevices() {
+        return $this->hasMany(\App\Models\UserDevice::class);
     }
 
 }

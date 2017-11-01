@@ -23,3 +23,5 @@ Route::resource('permissions', 'PermissionController');
 Route::resource('roles', 'RoleController');
 
 Route::resource('deviceCategories', 'DeviceCategoryController');
+
+Route::resource('devices', 'DeviceController');

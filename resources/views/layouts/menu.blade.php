@@ -15,3 +15,7 @@
     <a href="{!! route('deviceCategories.index') !!}"><i class="fa fa-edit"></i><span>Device Categories</span></a>
 </li>
 
+<li class="{{ Request::is('devices*') ? 'active' : '' }}">
+    <a href="{!! route('devices.index') !!}"><i class="fa fa-edit"></i><span>Devices</span></a>
+</li>
+

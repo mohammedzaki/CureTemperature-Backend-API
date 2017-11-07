@@ -158,7 +158,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\AnnotationsServiceProvider::class,
+        //App\Providers\AnnotationsServiceProvider::class,
         App\Providers\ConstantsServiceProvider::class,
         App\Providers\ResponseMacroServiceProvider::class,
         App\Providers\CustomValidatorServiceProvider::class,

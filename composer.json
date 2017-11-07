@@ -20,7 +20,6 @@
         "laravel/framework": "5.5.*",
         "laravel/passport": "^3.0",
         "laravel/tinker": "~1.0",
-        "laravelcollective/annotations": "5.5.x-dev",
         "laravelcollective/html": "^5.4",
         "league/fractal": "^0.17.0",
         "sentry/sentry-laravel": "^0.8.0",

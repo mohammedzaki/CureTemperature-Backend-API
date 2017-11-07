@@ -35,8 +35,7 @@
         "fzaninotto/faker": "~1.4",
         "laravelcollective/html": "^5.5.0",
         "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~6.0",
-        "user11001/eloquent-model-generator": "^2.0"
+        "phpunit/phpunit": "~6.0"
     },
     "autoload": {
         "classmap": [
@@ -74,11 +73,5 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "optimize-autoloader": true
-    },
-    "repositories": {
-        "repo-name": {
-            "type": "vcs",
-            "url": "https://github.com/jamisonvalenta/Laravel-4-Generators.git"
-        }
     }
 }

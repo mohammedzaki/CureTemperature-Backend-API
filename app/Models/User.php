@@ -132,14 +132,16 @@ class User extends Authenticatable {
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      * */
-    public function roles() {
+    public function roles()
+    {
         return $this->belongsToMany(\App\Models\Role::class, 'role_user');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      * */
-    public function userDevices() {
+    public function userDevices()
+    {
         return $this->hasMany(\App\Models\UserDevice::class);
     }
 

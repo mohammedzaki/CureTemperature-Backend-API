@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Repositories\UserRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
+use App\Repositories\RoleRepository;
 use Response;
 
 class UserController extends AppBaseController {
@@ -16,8 +17,13 @@ class UserController extends AppBaseController {
     /** @var  UserRepository */
     private $userRepository;
 
-    public function __construct(UserRepository $userRepo) {
+    /** @var  RoleRepository */
+    private $roleRepository;
+
+    public function __construct(UserRepository $userRepo, RoleRepository $roleRepo)
+    {
         $this->userRepository = $userRepo;
+        $this->roleRepository = $roleRepo;
     }
 
     /**
@@ -26,8 +32,18 @@ class UserController extends AppBaseController {
      * @param UserDataTable $userDataTable
      * @return Response
      */
-    public function index(UserDataTable $userDataTable) {
+    public function index(UserDataTable $userDataTable)
+    {
         return $userDataTable->render('users.index');
+    }
+
+    private function setViewData($user = null)
+    {
+        $roles = $this->roleRepository->allForHtmlSelect();
+        return [
+            'roles' => $roles,
+            'user'  => $user,
+        ];
     }
 
     /**
@@ -35,8 +51,10 @@ class UserController extends AppBaseController {
      *
      * @return Response
      */
-    public function create() {
-        return view('users.create');
+    public function create()
+    {
+
+        return view('users.create')->with($this->setViewData());
     }
 
     /**
@@ -46,12 +64,15 @@ class UserController extends AppBaseController {
      *
      * @return Response
      */
-    public function store(CreateUserRequest $request) {
+    public function store(CreateUserRequest $request)
+    {
         $input = $request->all();
 
         $input['password'] = bcrypt($input['password']);
 
         $user = $this->userRepository->create($input);
+
+        $user->roles()->attach($request->role);
 
         Flash::success('User saved successfully.');
 
@@ -65,7 +86,8 @@ class UserController extends AppBaseController {
      *
      * @return Response
      */
-    public function show($id) {
+    public function show($id)
+    {
         $user = $this->userRepository->findWithoutFail($id);
 
         if (empty($user)) {
@@ -84,8 +106,12 @@ class UserController extends AppBaseController {
      *
      * @return Response
      */
-    public function edit($id) {
+    public function edit($id)
+    {
         $user = $this->userRepository->findWithoutFail($id);
+
+        if (!empty($user->roles()->first()))
+            $user['role'] = $user->roles()->first()->id;
 
         if (empty($user)) {
             Flash::error('User not found');
@@ -93,7 +119,7 @@ class UserController extends AppBaseController {
             return redirect(route('users.index'));
         }
 
-        return view('users.edit')->with('user', $user);
+        return view('users.edit')->with($this->setViewData($user)); //->with('user', $user);
     }
 
     /**
@@ -104,7 +130,8 @@ class UserController extends AppBaseController {
      *
      * @return Response
      */
-    public function update($id, UpdateUserRequest $request) {
+    public function update($id, UpdateUserRequest $request)
+    {
         $user = $this->userRepository->findWithoutFail($id);
 
         if (empty($user)) {
@@ -117,7 +144,7 @@ class UserController extends AppBaseController {
         if (!empty($input['password'])) {
             $input['password'] = bcrypt($input['password']);
         }
-        
+
         $user = $this->userRepository->update($input, $id);
 
         Flash::success('User updated successfully.');
@@ -132,7 +159,8 @@ class UserController extends AppBaseController {
      *
      * @return Response
      */
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $user = $this->userRepository->findWithoutFail($id);
 
         if (empty($user)) {

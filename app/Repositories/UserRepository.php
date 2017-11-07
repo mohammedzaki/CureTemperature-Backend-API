@@ -14,6 +14,7 @@ use InfyOm\Generator\Common\BaseRepository;
  * @method User find($id, $columns = ['*'])
  * @method User first($columns = ['*'])
  * @method User makeModel()
+ * @method User parserResult($result)
 */
 class UserRepository extends BaseRepository
 {

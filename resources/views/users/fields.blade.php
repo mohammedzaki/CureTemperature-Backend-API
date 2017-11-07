@@ -16,6 +16,12 @@
     {!! Form::password('password', ['class' => 'form-control']) !!}
 </div>
 
+<!-- User Role -->
+<div class="form-group col-sm-6">
+    {!! Form::label('role', 'User Role:') !!}
+    {{ Form::select('role', $roles, null, ['class' => 'form-control', 'placeholder' => 'select user role']) }}
+</div>
+
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}

@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\Role;
-use InfyOm\Generator\Common\BaseRepository;
 
 /**
  * Class RoleRepository
@@ -13,9 +12,9 @@ use InfyOm\Generator\Common\BaseRepository;
  * @method Role findWithoutFail($id, $columns = ['*'])
  * @method Role find($id, $columns = ['*'])
  * @method Role first($columns = ['*'])
-*/
-class RoleRepository extends BaseRepository
-{
+ */
+class RoleRepository extends MyBaseRepository {
+
     /**
      * @var array
      */
@@ -27,9 +26,9 @@ class RoleRepository extends BaseRepository
 
     /**
      * Configure the Model
-     **/
-    public function model()
-    {
+     * */
+    public function model() {
         return Role::class;
     }
+
 }

@@ -14,3 +14,9 @@ use Illuminate\Http\Request;
 */
 
 Route::resource('users', 'UserAPIController');
+
+Route::resource('deviceFeeds', 'DeviceFeedsAPIController');
+
+//Route::put('users/saveDeviceToken/{user}', 'UserAPIController@saveDeviceToken')->name('users.saveDeviceToken');
+
+Route::resource('user_cates', 'UserCateAPIController');

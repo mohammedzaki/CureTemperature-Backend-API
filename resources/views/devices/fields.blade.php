@@ -25,7 +25,7 @@
 <!-- Device Category Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('device_category_id', 'Device Category Id:') !!}
-    {!! Form::number('device_category_id', null, ['class' => 'form-control']) !!}
+    {{ Form::select('device_category_id', $categories, null, ['class' => 'form-control', 'placeholder' => 'select device category']) }}
 </div>
 
 <!-- Submit Field -->

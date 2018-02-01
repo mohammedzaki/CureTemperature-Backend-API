@@ -14,7 +14,7 @@ use InfyOm\Generator\Common\BaseRepository;
  * @method DeviceCategory find($id, $columns = ['*'])
  * @method DeviceCategory first($columns = ['*'])
 */
-class DeviceCategoryRepository extends BaseRepository
+class DeviceCategoryRepository extends MyBaseRepository
 {
     /**
      * @var array

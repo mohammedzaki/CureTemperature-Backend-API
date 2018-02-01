@@ -16,7 +16,7 @@ use InfyOm\Generator\Common\BaseRepository;
  * @method User makeModel()
  * @method User parserResult($result)
 */
-class UserRepository extends BaseRepository
+class UserRepository extends MyBaseRepository
 {
     /**
      * @var array

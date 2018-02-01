@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateDeviceRequest;
 use App\Http\Requests\UpdateDeviceRequest;
 use App\Repositories\DeviceRepository;
+use App\Repositories\DeviceCategoryRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
@@ -16,9 +17,13 @@ class DeviceController extends AppBaseController
     /** @var  DeviceRepository */
     private $deviceRepository;
 
-    public function __construct(DeviceRepository $deviceRepo)
+    /** @var  DeviceCategoryRepository */
+    private $deviceCategoryRepository;
+    
+    public function __construct(DeviceRepository $deviceRepo, DeviceCategoryRepository $deviceCategoryRepo)
     {
         $this->deviceRepository = $deviceRepo;
+        $this->deviceCategoryRepository = $deviceCategoryRepo;
     }
 
     /**
@@ -32,6 +37,15 @@ class DeviceController extends AppBaseController
         return $deviceDataTable->render('devices.index');
     }
 
+    private function setViewData($device = null)
+    {
+        $categories = $this->deviceCategoryRepository->allForHtmlSelect();
+        return [
+            'categories' => $categories,
+            'device'  => $device,
+        ];
+    }
+
     /**
      * Show the form for creating a new Device.
      *
@@ -39,7 +53,7 @@ class DeviceController extends AppBaseController
      */
     public function create()
     {
-        return view('devices.create');
+        return view('devices.create')->with($this->setViewData());
     }
 
     /**
@@ -97,7 +111,7 @@ class DeviceController extends AppBaseController
             return redirect(route('devices.index'));
         }
 
-        return view('devices.edit')->with('device', $device);
+        return view('devices.edit')->with($this->setViewData($device));
     }
 
     /**

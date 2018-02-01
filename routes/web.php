@@ -25,3 +25,9 @@ Route::resource('roles', 'RoleController');
 Route::resource('deviceCategories', 'DeviceCategoryController');
 
 Route::resource('devices', 'DeviceController');
+
+Route::resource('deviceFeeds', 'DeviceFeedsController');
+
+Route::resource('userDevices', 'UserDevicesController');
+
+Route::resource('userCates', 'UserCateController');

@@ -138,11 +138,11 @@ class User extends Authenticatable {
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      * */
     public function userDevices()
     {
-        return $this->hasMany(\App\Models\UserDevice::class);
+        return $this->belongsToMany(\App\Models\Device::class, 'user_devices');
     }
 
 }

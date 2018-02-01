@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Response;
+use Illuminate\Http\Response as ResponseClass;
 
 /**
  * Class UserController
@@ -21,9 +21,12 @@ class UserAPIController extends AppBaseController
 {
     /** @var  UserRepository */
     private $userRepository;
-
+    
     public function __construct(UserRepository $userRepo)
     {
+        $this->middleware('cros');
+        $this->middleware('auth:api');
+        $this->middleware('bindings');
         $this->userRepository = $userRepo;
     }
 
@@ -278,4 +281,28 @@ class UserAPIController extends AppBaseController
 
         return $this->sendResponse($id, 'User deleted successfully');
     }
+    
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\UserRequest  $request
+     * @return \Illuminate\Http\Response
+     * @PUT("api/SaveDeviceToken/{user}", as="api.users.saveDeviceToken")
+     */
+    public function saveDeviceToken(UpdateUserAPIRequest $request, User $user) {
+        $all = $request->all();
+        /*switch ($all['deviceType']) {
+            case 'android':
+                $all['device_type'] = 1;
+                break;
+            case 'ios':
+                $all['device_type'] = 2;
+                break;
+        }*/
+        $all['device_token'] = $all['deviceToken'];
+        $user->update($all);
+        //return $this->sendResponse($user->toArray(), 'User updated successfully');
+        return response()->jsonSuccess(ResponseClass::HTTP_ACCEPTED);
+    }
+
 }

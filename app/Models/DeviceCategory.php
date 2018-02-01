@@ -6,7 +6,9 @@ use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * @SWG\Definition(
+ * App\Models\DeviceCategory
+ *
+ * @SWG\Definition (
  *      definition="DeviceCategory",
  *      required={""},
  *      @SWG\Property(
@@ -45,6 +47,31 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *          format="int32"
  *      )
  * )
+ * @property int $id
+ * @property string $name
+ * @property float $min_temperature
+ * @property float $max_temperature
+ * @property int|null $alarm_times
+ * @property int|null $alarm_frequency
+ * @property \Carbon\Carbon|null $deleted_at
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Device[] $devices
+ * @method static bool|null forceDelete()
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\DeviceCategory onlyTrashed()
+ * @method static bool|null restore()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DeviceCategory whereAlarmFrequency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DeviceCategory whereAlarmTimes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DeviceCategory whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DeviceCategory whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DeviceCategory whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DeviceCategory whereMaxTemperature($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DeviceCategory whereMinTemperature($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DeviceCategory whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DeviceCategory whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\DeviceCategory withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\DeviceCategory withoutTrashed()
+ * @mixin \Eloquent
  */
 class DeviceCategory extends Model
 {

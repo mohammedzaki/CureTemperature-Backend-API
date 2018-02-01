@@ -16,7 +16,7 @@ use Response;
  * @package App\Http\Controllers
  * @Controller(prefix="roles")
  * @Resource("/roles")
- * @Middleware({"cros", "auth", "bindings"})
+ * @Middleware({"cros", "web", "auth", "bindings"})
  */
 class RoleController extends AppBaseController
 {

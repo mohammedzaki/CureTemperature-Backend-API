@@ -17,7 +17,7 @@ use Response;
  * @package App\Http\Controllers
  * @Controller(prefix="users")
  * @Resource("/users")
- * @Middleware({"cros", "auth", "bindings"})
+ * @Middleware({"cros", "web", "auth", "bindings"})
  */
 class UserController extends AppBaseController {
 

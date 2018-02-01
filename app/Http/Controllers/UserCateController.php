@@ -16,7 +16,7 @@ use Response;
  * @package App\Http\Controllers
  * @Controller(prefix="userCates")
  * @Resource("/userCates")
- * @Middleware({"cros", "auth", "bindings"})
+ * @Middleware({"cros", "web", "auth", "bindings"})
  */
 class UserCateController extends AppBaseController
 {

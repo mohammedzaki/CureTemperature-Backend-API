@@ -18,7 +18,7 @@ use Response;
  * @package App\Http\Controllers
  * @Controller(prefix="userDevices")
  * @Resource("/userDevices")
- * @Middleware({"cros", "auth", "bindings"})
+ * @Middleware({"cros", "web", "auth", "bindings"})
  */
 class UserDevicesController extends AppBaseController
 {

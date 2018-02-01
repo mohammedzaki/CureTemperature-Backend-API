@@ -16,7 +16,7 @@ use Response;
  * @package App\Http\Controllers
  * @Controller(prefix="permissions")
  * @Resource("/permissions")
- * @Middleware({"cros", "auth", "bindings"})
+ * @Middleware({"cros", "web", "auth", "bindings"})
  */
 class PermissionController extends AppBaseController
 {

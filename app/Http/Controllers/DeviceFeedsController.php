@@ -16,7 +16,7 @@ use Response;
  * @package App\Http\Controllers
  * @Controller(prefix="deviceFeeds")
  * @Resource("/deviceFeeds")
- * @Middleware({"cros", "auth", "bindings"})
+ * @Middleware({"cros", "web", "auth", "bindings"})
  */
 class DeviceFeedsController extends AppBaseController
 {

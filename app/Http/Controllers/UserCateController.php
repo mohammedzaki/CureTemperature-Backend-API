@@ -11,6 +11,13 @@ use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
+/**
+ * Class UserCateController
+ * @package App\Http\Controllers
+ * @Controller(prefix="userCates")
+ * @Resource("/userCates")
+ * @Middleware({"cros", "auth", "bindings"})
+ */
 class UserCateController extends AppBaseController
 {
     /** @var  UserCateRepository */

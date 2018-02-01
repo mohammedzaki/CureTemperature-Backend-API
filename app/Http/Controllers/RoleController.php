@@ -11,6 +11,13 @@ use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
+/**
+ * Class RoleController
+ * @package App\Http\Controllers
+ * @Controller(prefix="roles")
+ * @Resource("/roles")
+ * @Middleware({"cros", "auth", "bindings"})
+ */
 class RoleController extends AppBaseController
 {
     /** @var  RoleRepository */

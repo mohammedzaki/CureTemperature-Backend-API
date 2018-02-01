@@ -15,6 +15,9 @@ use Illuminate\Http\Response as ResponseClass;
 /**
  * Class UserController
  * @package App\Http\Controllers\API
+ * @Controller(prefix="users")
+ * @Resource("/api/users")
+ * @Middleware({"cros", "api", "bindings"})
  */
 
 class UserAPIController extends AppBaseController

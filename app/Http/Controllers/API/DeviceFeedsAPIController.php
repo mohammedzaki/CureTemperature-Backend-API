@@ -18,8 +18,10 @@ use Notification;
 /**
  * Class DeviceFeedsController
  * @package App\Http\Controllers\API
+ * @Controller(prefix="deviceFeeds")
+ * @Resource("/api/deviceFeeds")
+ * @Middleware({"cros", "api", "bindings"})
  */
-
 class DeviceFeedsAPIController extends AppBaseController
 {
     /** @var  DeviceFeedsRepository */

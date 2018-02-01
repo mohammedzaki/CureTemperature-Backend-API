@@ -11,6 +11,13 @@ use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
+/**
+ * Class PermissionController
+ * @package App\Http\Controllers
+ * @Controller(prefix="permissions")
+ * @Resource("/permissions")
+ * @Middleware({"cros", "auth", "bindings"})
+ */
 class PermissionController extends AppBaseController
 {
     /** @var  PermissionRepository */

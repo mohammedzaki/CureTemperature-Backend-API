@@ -12,6 +12,13 @@ use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
+/**
+ * Class DeviceController
+ * @package App\Http\Controllers
+ * @Controller(prefix="devices")
+ * @Resource("/devices")
+ * @Middleware({"cros", "auth", "bindings"})
+ */
 class DeviceController extends AppBaseController
 {
     /** @var  DeviceRepository */

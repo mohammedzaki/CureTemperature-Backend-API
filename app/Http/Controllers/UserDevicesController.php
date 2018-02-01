@@ -13,6 +13,13 @@ use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
+/**
+ * Class UserDevicesController
+ * @package App\Http\Controllers
+ * @Controller(prefix="userDevices")
+ * @Resource("/userDevices")
+ * @Middleware({"cros", "auth", "bindings"})
+ */
 class UserDevicesController extends AppBaseController
 {
     /** @var  UserDevicesRepository */

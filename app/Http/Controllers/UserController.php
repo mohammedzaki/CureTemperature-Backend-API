@@ -12,6 +12,13 @@ use App\Http\Controllers\AppBaseController;
 use App\Repositories\RoleRepository;
 use Response;
 
+/**
+ * Class UserController
+ * @package App\Http\Controllers
+ * @Controller(prefix="users")
+ * @Resource("/users")
+ * @Middleware({"cros", "auth", "bindings"})
+ */
 class UserController extends AppBaseController {
 
     /** @var  UserRepository */

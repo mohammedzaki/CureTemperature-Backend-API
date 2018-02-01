@@ -18,7 +18,7 @@
         "infyomlabs/laravel-generator": "5.5.x-dev",
         "infyomlabs/swagger-generator": "dev-master",
         "laravel/framework": "5.5.*",
-        "laravel/passport": "^3.0",
+        "laravel/passport": "^4.0",
         "laravel/tinker": "~1.0",
         "laravelcollective/annotations": "5.5.0",
         "laravelcollective/html": "^5.4",

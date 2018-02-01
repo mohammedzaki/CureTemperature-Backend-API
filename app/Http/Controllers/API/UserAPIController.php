@@ -15,7 +15,7 @@ use Illuminate\Http\Response as ResponseClass;
 /**
  * Class UserController
  * @package App\Http\Controllers\API
- * @Controller(prefix="users")
+ * @Controller(prefix="/api/users")
  * @Resource("/api/users")
  * @Middleware({"cros", "api", "bindings"})
  */
@@ -290,7 +290,7 @@ class UserAPIController extends AppBaseController
      *
      * @param  \App\Http\Requests\UserRequest  $request
      * @return \Illuminate\Http\Response
-     * @PUT("api/SaveDeviceToken/{user}", as="api.users.saveDeviceToken")
+     * @PUT("save-device-token/{user}", as="api.users.saveDeviceToken")
      */
     public function saveDeviceToken(UpdateUserAPIRequest $request, User $user) {
         $all = $request->all();

@@ -61,13 +61,13 @@
                             </div>
 
                             <div class="mu-header-featured-content">
-                                <h1>Welcome To <span>Apex App</span></h1>
+                                <h1>Welcome To <span>Cure-Temp App</span></h1>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto nisi, consectetur odit voluptate labore veniam, neque iure cumque aut recusandae iusto. Aliquid quos vel optio dolore consequuntur accusantium autem quaerat!</p>
 
                                 <div class="mu-app-download-area">
                                     <h4>Download The App</h4>
-                                    <a class="mu-apple-btn" href="#"><i class="fa fa-apple"></i><span>apple store</span></a>
-                                    <a class="mu-google-btn" href="#"><i class="fa fa-android"></i><span>google play</span></a>
+                                    <a class="mu-apple-btn" href="itms-services://?action=download-manifest&url=https://cure-temperature.herokuapp.com/app/manifest.plist"><i class="fa fa-apple"></i><span>iPhone</span></a>
+                                    <a class="mu-google-btn" href="https://cure-temperature.herokuapp.com/app/android-debug.apk"><i class="fa fa-android"></i><span>Android</span></a>
                                     <!-- <a class="mu-windows-btn" href="#"><i class="fa fa-windows"></i><span>windows store</span></a> -->
                                 </div>
 

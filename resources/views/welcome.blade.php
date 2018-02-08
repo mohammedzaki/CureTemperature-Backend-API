@@ -66,7 +66,7 @@
 
                                 <div class="mu-app-download-area">
                                     <h4>Download The App</h4>
-                                    <a class="mu-apple-btn" href="itms-services://?action=download-manifest&url={{ url('mobileapp/manifest.plist') }}"><i class="fa fa-apple"></i><span>iPhone</span></a>
+                                    <a class="mu-apple-btn" href="itms-services://?action=download-manifest&url=https://cure-temperature.herokuapp.com//mobileapp/manifest.plist"><i class="fa fa-apple"></i><span>iPhone</span></a>
                                     <a class="mu-google-btn" href="{{ url('mobileapp/android-debug.apk') }}"><i class="fa fa-android"></i><span>Android</span></a>
                                     <!-- <a class="mu-windows-btn" href="#"><i class="fa fa-windows"></i><span>windows store</span></a> -->
                                 </div>

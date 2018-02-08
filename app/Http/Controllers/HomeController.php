@@ -14,7 +14,7 @@ class HomeController extends Controller {
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
-     * @Get("/home", as="home")
+     * @Get("/admin", as="admin")
      * @Middleware({"auth"})
      */
     public function index() {
@@ -45,5 +45,7 @@ class HomeController extends Controller {
     
     // https://api.thingspeak.com/update?api_key=R26E9T0CNXKEIYSB&field1=29&field2=25&field3=newSerial3
     // https://thingspeak.com/apps/thinghttp/60518
+    
+    // https://api.thingspeak.com/update?api_key=2ICLU5MQB2KI82MS&field1=90&field2=12&field3=AM175
     
 }

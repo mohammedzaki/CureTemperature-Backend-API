@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Cure-Temp.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>armv7</string>
+				<string>arm64</string>
+			</array>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>F9DB133B6A6AB30819E290B41A7F177F084D86C7</string>
+				<key>dateExpires</key>
+				<string>9/10/19</string>
+				<key>type</key>
+				<string>iOS Distribution</string>
+			</dict>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>NLR6TK5YBW.com.zaki.cure.temperature.test</string>
+				<key>aps-environment</key>
+				<string>production</string>
+				<key>com.apple.developer.team-identifier</key>
+				<string>NLR6TK5YBW</string>
+				<key>get-task-allow</key>
+				<false/>
+			</dict>
+			<key>name</key>
+			<string>Cure-Temp.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>2cfc1b80-d131-4079-9296-91146bde4c07</string>
+				<key>name</key>
+				<string>iOS Team Inhouse Provisioning Profile: com.zaki.cure.temperature.test</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>NLR6TK5YBW</string>
+				<key>name</key>
+				<string>Eye Egypt</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

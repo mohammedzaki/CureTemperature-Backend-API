@@ -87,6 +87,7 @@
         });
 
         @if ($initOAuth)
+            console.log('test auth');
 // Method can be called in any place after calling constructor SwaggerUIBundle
         ui.initOAuth({
             clientId: '{{ $clientId }}',

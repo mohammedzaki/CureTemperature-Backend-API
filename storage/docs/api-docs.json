@@ -1,11 +1,42 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "Laravel Generator APIs",
+        "title": "Cure-Temperature APIs",
+        "description": "This is Cure-Temperature server. You can use the api key `special-key` to test the authorization filters.",
+        "contact": {
+            "email": "mohammedzaki.dev@gmail.com"
+        },
         "version": "1.0.0"
     },
+    "host": "cure-temperature.localhost",
     "basePath": "/api",
+    "schemes": [
+        "http",
+        "https"
+    ],
     "paths": {
+        "/userDevices/{userId}": {
+            "get": {
+                "tags": [
+                    "UserDevices"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/userId"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "$ref": "#/responses/device"
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "$ref": "#/parameters/userId"
+                }
+            ]
+        },
         "/deviceFeeds": {
             "get": {
                 "tags": [
@@ -403,6 +434,205 @@
                     }
                 }
             }
+        },
+        "/userCates": {
+            "get": {
+                "tags": [
+                    "UserCate"
+                ],
+                "summary": "Get a listing of the UserCates.",
+                "description": "Get all UserCates",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/UserCate"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "UserCate"
+                ],
+                "summary": "Store a newly created UserCate in storage",
+                "description": "Store UserCate",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "UserCate that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/UserCate"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/UserCate"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/userCates/{id}": {
+            "get": {
+                "tags": [
+                    "UserCate"
+                ],
+                "summary": "Display the specified UserCate",
+                "description": "Get UserCate",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of UserCate",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/UserCate"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "UserCate"
+                ],
+                "summary": "Update the specified UserCate in storage",
+                "description": "Update UserCate",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of UserCate",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "UserCate that should be updated",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/UserCate"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/UserCate"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "UserCate"
+                ],
+                "summary": "Remove the specified UserCate from storage",
+                "description": "Delete UserCate",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of UserCate",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -586,7 +816,7 @@
                 }
             }
         },
-        "UserDevices": {
+        "UserCate": {
             "required": [
                 ""
             ],
@@ -596,6 +826,37 @@
                     "type": "integer",
                     "format": "int32"
                 },
+                "name": {
+                    "description": "name",
+                    "type": "string"
+                },
+                "min_temperature": {
+                    "description": "min_temperature",
+                    "type": "number",
+                    "format": "float"
+                },
+                "max_temperature": {
+                    "description": "max_temperature",
+                    "type": "number",
+                    "format": "float"
+                },
+                "alarm_times": {
+                    "description": "alarm_times",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "alarm_frequency": {
+                    "description": "alarm_frequency",
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "UserDevices": {
+            "required": [
+                ""
+            ],
+            "properties": {
                 "user_id": {
                     "description": "user_id",
                     "type": "integer",
@@ -605,11 +866,78 @@
                     "description": "device_id",
                     "type": "integer",
                     "format": "int32"
-                },
-                "name": {
-                    "description": "name",
-                    "type": "string"
                 }
+            }
+        }
+    },
+    "parameters": {
+        "userId": {
+            "name": "userId",
+            "in": "path",
+            "description": "The ID of the user",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+        },
+        "search": {
+            "name": "search",
+            "in": "query",
+            "description": "Search Criteria",
+            "required": false,
+            "type": "string"
+        },
+        "searchFields": {
+            "name": "searchFields",
+            "in": "query",
+            "description": "Search Fields conditions",
+            "required": false,
+            "type": "string"
+        },
+        "searchJoin": {
+            "name": "searchJoin",
+            "in": "query",
+            "description": "Search Fields join conditions",
+            "required": false,
+            "type": "string"
+        },
+        "with": {
+            "name": "with",
+            "in": "query",
+            "description": "Search with additional data.",
+            "required": false,
+            "type": "string"
+        }
+    },
+    "responses": {
+        "device": {
+            "description": "successful operation",
+            "schema": {
+                "properties": {
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/Device"
+                        }
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "securityDefinitions": {
+        "cure_auth2": {
+            "type": "oauth2",
+            "flow": "password",
+            "tokenUrl": "http://cure-temperature.localhost/oauth/token",
+            "scopes": {
+                "read:pets": "read your pets",
+                "write:pets": "modify pets in your account"
             }
         }
     }

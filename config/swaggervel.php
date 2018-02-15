@@ -49,7 +49,7 @@ return [
       | If set to true, automatically regenerates the definitions everytime you open the UI
       |--------------------------------------------------------------------------
     */
-    "auto-generate" => false,
+    "auto-generate" => true,
 
     /*
       |--------------------------------------------------------------------------
@@ -74,21 +74,21 @@ return [
       | You can configure OAuth2 authorization by changing value to true
       |--------------------------------------------------------------------------
     */
-    'init-o-auth' => false,
+    'init-o-auth' => true,
 
     /*
       |--------------------------------------------------------------------------
       | Default clientId. MUST be a string
       |--------------------------------------------------------------------------
     */
-    'client-id' => 'client_id',
+    'client-id' => '6',
 
     /*
       |--------------------------------------------------------------------------
       | Default clientSecret. MUST be a string
       |--------------------------------------------------------------------------
     */
-    'client-secret' => 'client_secret',
+    'client-secret' => '7aBpKKvsZfrreEOsPYkVv0o9X9o7lWiAU59BrNvB',
 
     /*
       |--------------------------------------------------------------------------

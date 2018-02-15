@@ -15,7 +15,7 @@ use Response;
 /**
  * Class UserCateController
  * @package App\Http\Controllers\API
- * @Controller(prefix="user_cates")
+ * @Controller(prefix="/api/user_cates")
  * @Resource("/api/user_cates")
  * @Middleware({"cros", "api", "bindings"})
  */

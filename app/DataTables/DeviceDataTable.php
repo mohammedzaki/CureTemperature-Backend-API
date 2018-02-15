@@ -17,8 +17,15 @@ class DeviceDataTable extends DataTable
     public function dataTable($query)
     {
         $dataTable = new EloquentDataTable($query);
-
-        return $dataTable->addColumn('action', 'devices.datatables_actions');
+        
+        return $dataTable 
+                ->addColumn('deviceCategoryName', function (Device $device) {
+                    return $device->deviceCategory ? $device->deviceCategory->name : '';
+                })
+                ->addColumn('deviceAccountName', function (Device $device) {
+                    return $device->deviceAccount ? $device->deviceAccount->name : '';
+                })
+                ->addColumn('action', 'devices.datatables_actions');
     }
 
     /**
@@ -68,7 +75,9 @@ class DeviceDataTable extends DataTable
             'hospital',
             'place',
             'serial_number',
-            'device_category_id'
+            //'device_category_id',
+            'deviceCategoryName',
+            'deviceAccountName'
         ];
     }
 

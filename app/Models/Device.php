@@ -52,8 +52,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $device_category_id
  * @property \Carbon\Carbon|null $deleted_at
  * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
+ * @property \Carbon\Carbon|null $updated_at 
  * @property-read \App\Models\DeviceCategory|null $deviceCategory
+ * @property-read \App\Models\Account|null $deviceAccount
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\DeviceFeeds[] $deviceFeeds
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\UserDevice[] $userDevices
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
@@ -124,6 +125,14 @@ class Device extends Model
     {
         return $this->belongsTo(\App\Models\DeviceCategory::class);
     }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function deviceAccount()
+    {
+        return $this->belongsTo(\App\Models\Account::class, 'account_id');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -131,14 +140,6 @@ class Device extends Model
     public function deviceFeeds()
     {
         return $this->hasMany(\App\Models\DeviceFeeds::class);
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     **/
-    public function userDevices()
-    {
-        return $this->hasMany(\App\Models\UserDevice::class);
     }
     
     /**

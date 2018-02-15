@@ -1,0 +1,49 @@
+<?php
+
+namespace App\Criteria;
+
+use Prettus\Repository\Contracts\CriteriaInterface;
+use Prettus\Repository\Contracts\RepositoryInterface;
+use App\Models\{
+    Device,
+    User
+};
+
+/**
+ * Class UserDevicesGetCriteriaCriteria.
+ *
+ * @package namespace App\Criteria;
+ */
+class UserDevicesGetCriteria implements CriteriaInterface {
+
+    private $user;
+
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * Apply criteria in query repository
+     *
+     * @param string              $model
+     * @param RepositoryInterface $repository
+     *
+     * @return mixed
+     */
+    public function apply($model, RepositoryInterface $repository)
+    {
+        if ($model instanceof Device) {
+            //$model = User::find($this->userId)->userDevices()->get();
+            $model = $model
+                    ->leftJoin('user_devices', 'user_devices.device_id', '=', 'devices.id')
+                    ->leftJoin('users', 'user_devices.user_id', '=', 'users.id')
+                    ->distinct()
+                    ->select('devices.*')
+                    ->where('users.id', '=', $this->user->id);
+        }
+
+        return $model;
+    }
+
+}

@@ -23,3 +23,7 @@
     <a href="{!! route('userCates.index') !!}"><i class="fa fa-edit"></i><span>User Cates</span></a>
 </li>
 
+<li class="{{ Request::is('accounts*') ? 'active' : '' }}">
+    <a href="{!! route('accounts.index') !!}"><i class="fa fa-edit"></i><span>Accounts</span></a>
+</li>
+

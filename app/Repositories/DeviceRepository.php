@@ -21,10 +21,9 @@ class DeviceRepository extends MyBaseRepository
      */
     protected $fieldSearchable = [
         'name',
-        'hospital',
-        'place',
         'serial_number',
-        'device_category_id'
+        'device_category_id',
+        'account_id'
     ];
 
     /**

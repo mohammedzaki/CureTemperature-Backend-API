@@ -6,8 +6,8 @@ use App\Models\Account;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
-class AccountDataTable extends DataTable
-{
+class AccountDataTable extends DataTable {
+
     /**
      * Build DataTable class.
      *
@@ -18,7 +18,14 @@ class AccountDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'accounts.datatables_actions');
+        return $dataTable
+                        ->addColumn('users_details_url', function($account) {
+                            return url("accounts/{$account->id}/users");
+                        })
+                        ->addColumn('devices_details_url', function($account) {
+                            return url("accounts/{$account->id}/devices");
+                        })
+                        ->addColumn('action', 'accounts.datatables_actions');
     }
 
     /**
@@ -40,20 +47,20 @@ class AccountDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->columns($this->getColumns())
-            ->minifiedAjax()
-            ->addAction(['width' => '80px'])
-            ->parameters([
-                'dom'     => 'Bfrtip',
-                'order'   => [[0, 'desc']],
-                'buttons' => [
-                    'create',
-                    'export',
-                    'print',
-                    'reset',
-                    'reload',
-                ],
-            ]);
+                        ->columns($this->getColumns())
+                        ->minifiedAjax()
+                        ->addAction(['width' => '150px'])
+                        ->parameters([
+                            'dom'     => 'Bfrtip',
+                            'order'   => [[0, 'desc']],
+                            'buttons' => [
+                                'create',
+                                'export',
+                                'print',
+                                'reset',
+                                'reload',
+                            ],
+        ]);
     }
 
     /**
@@ -80,4 +87,5 @@ class AccountDataTable extends DataTable
     {
         return 'accountsdatatable_' . time();
     }
+
 }

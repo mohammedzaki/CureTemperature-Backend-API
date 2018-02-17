@@ -3,11 +3,15 @@
 namespace App\DataTables;
 
 use App\Models\User;
-use Yajra\DataTables\Services\DataTable;
+use App\Repositories\UserRepository;
 use Yajra\DataTables\EloquentDataTable;
+use App\Criteria\AccountFilterCriteria;
 
-class UserDataTable extends DataTable
-{
+class UserDataTable extends MyBaseDataTable {
+
+    public $account;
+    public $userRepository;
+    
     /**
      * Build DataTable class.
      *
@@ -18,7 +22,12 @@ class UserDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'users.datatables_actions');
+        return $dataTable
+                        //->addColumn('details', 'users.datatables_details')
+                        ->addColumn('devices_details_url', function($user) {
+                            return url("users/{$user->id}/devices");
+                        })
+                        ->addColumn('action', 'users.datatables_actions');
     }
 
     /**
@@ -29,7 +38,13 @@ class UserDataTable extends DataTable
      */
     public function query(User $model)
     {
-        return $model->newQuery();
+        if (isset($this->account)) {
+            $this->userRepository = new UserRepository(app());
+            $this->userRepository->pushCriteria(new AccountFilterCriteria($this->account->id));
+            return $this->userRepository->getModelForDatatable();
+        } else {
+            return $model->newQuery();
+        }
     }
 
     /**
@@ -40,20 +55,20 @@ class UserDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->columns($this->getColumns())
-            ->minifiedAjax()
-            ->addAction(['width' => '80px'])
-            ->parameters([
-                'dom'     => 'Bfrtip',
-                'order'   => [[0, 'desc']],
-                'buttons' => [
-                    'create',
-                    'export',
-                    'print',
-                    'reset',
-                    'reload',
-                ],
-            ]);
+                        ->columns($this->getColumns())
+                        ->minifiedAjax()
+                        ->addAction(['width' => '120px'])
+                        ->parameters([
+                            'dom'     => 'Bfrtip',
+                            'order'   => [[0, 'asc']],
+                            'buttons' => [
+                                'create',
+                                'export',
+                                'print',
+                                'reset',
+                                'reload',
+                            ],
+        ]);
     }
 
     /**
@@ -64,11 +79,12 @@ class UserDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'id',
             'name',
             'email',
-            //'password',
-            //'remember_token',
-            //'device_token'
+                //'password',
+                //'remember_token',
+                //'device_token'
         ];
     }
 
@@ -81,4 +97,5 @@ class UserDataTable extends DataTable
     {
         return 'usersdatatable_' . time();
     }
+
 }

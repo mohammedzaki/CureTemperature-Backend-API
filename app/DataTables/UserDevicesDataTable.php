@@ -6,8 +6,8 @@ use App\Models\UserDevice;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
-class UserDevicesDataTable extends DataTable
-{
+class UserDevicesDataTable extends DataTable {
+
     /**
      * Build DataTable class.
      *
@@ -18,7 +18,18 @@ class UserDevicesDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'user_devices.datatables_actions');
+        return $dataTable
+                        ->addColumn('id', 1)
+                        ->addColumn('deviceName', function (UserDevice $device) {
+                            return $device->device->name ?: '';
+                        })
+                        ->addColumn('userName', function (UserDevice $device) {
+                            return $device->user->name ?: '';
+                        })
+                        ->addColumn('deviceAccountName', function (UserDevice $device) {
+                            return $device->device->deviceAccount->name ?: '';
+                        })
+                        ->addColumn('action', 'user_devices.datatables_actions');
     }
 
     /**
@@ -40,20 +51,20 @@ class UserDevicesDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->columns($this->getColumns())
-            ->minifiedAjax()
-            ->addAction(['width' => '80px'])
-            ->parameters([
-                'dom'     => 'Bfrtip',
-                'order'   => [[0, 'desc']],
-                'buttons' => [
-                    'create',
-                    'export',
-                    'print',
-                    'reset',
-                    'reload',
-                ],
-            ]);
+                        ->columns($this->getColumns())
+                        ->minifiedAjax()
+                        ->addAction(['width' => '80px'])
+                        ->parameters([
+                            'dom'     => 'Bfrtip',
+                            'order'   => [[0, 'desc']],
+                            'buttons' => [
+                                'create',
+                                'export',
+                                'print',
+                                'reset',
+                                'reload',
+                            ],
+        ]);
     }
 
     /**
@@ -64,8 +75,9 @@ class UserDevicesDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'device_id',
-            'user_id'
+            'deviceName',
+            'userName',
+            'deviceAccountName'
         ];
     }
 
@@ -78,4 +90,5 @@ class UserDevicesDataTable extends DataTable
     {
         return 'user_devicesdatatable_' . time();
     }
+
 }

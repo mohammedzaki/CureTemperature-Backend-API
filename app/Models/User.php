@@ -95,7 +95,8 @@ class User extends Authenticatable {
         'email',
         'password',
         'remember_token',
-        'device_token'
+        'device_token',
+        'account_id'
     ];
 
     /**

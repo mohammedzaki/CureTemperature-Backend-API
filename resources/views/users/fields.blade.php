@@ -16,6 +16,12 @@
     {!! Form::password('password', ['class' => 'form-control']) !!}
 </div>
 
+<!-- User Account -->
+<div class="form-group col-sm-6">
+    {!! Form::label('account_id', 'User Account:') !!}
+    {{ Form::select('account_id', $accounts, null, ['class' => 'form-control', 'placeholder' => 'select user account']) }}
+</div>
+
 <!-- User Role -->
 <div class="form-group col-sm-6">
     {!! Form::label('role', 'User Role:') !!}

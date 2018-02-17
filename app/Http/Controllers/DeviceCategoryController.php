@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\DeviceCategoryDataTable;
+use App\DataTables\{
+    DeviceCategoryDataTable,
+    DeviceDataTable
+};
 use App\Http\Requests;
 use App\Http\Requests\CreateDeviceCategoryRequest;
 use App\Http\Requests\UpdateDeviceCategoryRequest;
@@ -18,8 +21,8 @@ use Response;
  * @Resource("/deviceCategories")
  * @Middleware({"cros", "web", "auth", "bindings"})
  */
-class DeviceCategoryController extends AppBaseController
-{
+class DeviceCategoryController extends AppBaseController {
+
     /** @var  DeviceCategoryRepository */
     private $deviceCategoryRepository;
 
@@ -155,4 +158,19 @@ class DeviceCategoryController extends AppBaseController
 
         return redirect(route('deviceCategories.index'));
     }
+
+    /**
+     * Remove the specified User from storage.
+     *
+     * @param  int $id
+     *
+     * @return Response
+     * @Get("/{category}/devices", as="user.getCategoryDevices")
+     */
+    public function devices($id, DeviceDataTable $deviceDataTable)
+    {
+        $deviceDataTable->categoryId = $id;
+        return $deviceDataTable->render('devices.index');
+    }
+
 }

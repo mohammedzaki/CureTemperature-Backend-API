@@ -5,9 +5,20 @@ namespace App\DataTables;
 use App\Models\Device;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use App\Repositories\DeviceRepository;
+use App\Criteria\{
+    UserDevicesGetCriteria,
+    AccountFilterCriteria,
+    CategoryFilterCriteria
+};
 
-class DeviceDataTable extends DataTable
-{
+class DeviceDataTable extends DataTable {
+
+    public $user;
+    public $account;
+    public $categoryId;
+    public $deviceRepository;
+
     /**
      * Build DataTable class.
      *
@@ -17,15 +28,15 @@ class DeviceDataTable extends DataTable
     public function dataTable($query)
     {
         $dataTable = new EloquentDataTable($query);
-        
-        return $dataTable 
-                ->addColumn('deviceCategoryName', function (Device $device) {
-                    return $device->deviceCategory ? $device->deviceCategory->name : '';
-                })
-                ->addColumn('deviceAccountName', function (Device $device) {
-                    return $device->deviceAccount ? $device->deviceAccount->name : '';
-                })
-                ->addColumn('action', 'devices.datatables_actions');
+
+        return $dataTable
+                        ->addColumn('deviceCategoryName', function (Device $device) {
+                            return $device->deviceCategory ? $device->deviceCategory->name : '';
+                        })
+                        ->addColumn('deviceAccountName', function (Device $device) {
+                            return $device->deviceAccount ? $device->deviceAccount->name : '';
+                        })
+                        ->addColumn('action', 'devices.datatables_actions');
     }
 
     /**
@@ -36,7 +47,21 @@ class DeviceDataTable extends DataTable
      */
     public function query(Device $model)
     {
-        return $model->newQuery();
+        if (isset($this->user)) {
+            $this->deviceRepository = new DeviceRepository(app());
+            $this->deviceRepository->pushCriteria(new UserDevicesGetCriteria($this->user));
+            return $this->deviceRepository->getModelForDatatable();
+        } elseif (isset($this->account)) {
+            $this->deviceRepository = new DeviceRepository(app());
+            $this->deviceRepository->pushCriteria(new AccountFilterCriteria($this->account->id));
+            return $this->deviceRepository->getModelForDatatable();
+        } elseif (isset($this->categoryId)) {
+            $this->deviceRepository = new DeviceRepository(app());
+            $this->deviceRepository->pushCriteria(new CategoryFilterCriteria($this->categoryId));
+            return $this->deviceRepository->getModelForDatatable();
+        } else {
+            return $model->newQuery();
+        }
     }
 
     /**
@@ -47,20 +72,20 @@ class DeviceDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->columns($this->getColumns())
-            ->minifiedAjax()
-            ->addAction(['width' => '80px'])
-            ->parameters([
-                'dom'     => 'Bfrtip',
-                'order'   => [[0, 'desc']],
-                'buttons' => [
-                    'create',
-                    'export',
-                    'print',
-                    'reset',
-                    'reload',
-                ],
-            ]);
+                        ->columns($this->getColumns())
+                        ->minifiedAjax()
+                        ->addAction(['width' => '80px'])
+                        ->parameters([
+                            'dom'     => 'Bfrtip',
+                            'order'   => [[0, 'desc']],
+                            'buttons' => [
+                                'create',
+                                'export',
+                                'print',
+                                'reset',
+                                'reload',
+                            ],
+        ]);
     }
 
     /**
@@ -72,8 +97,6 @@ class DeviceDataTable extends DataTable
     {
         return [
             'name',
-            'hospital',
-            'place',
             'serial_number',
             //'device_category_id',
             'deviceCategoryName',
@@ -90,4 +113,5 @@ class DeviceDataTable extends DataTable
     {
         return 'devicesdatatable_' . time();
     }
+
 }

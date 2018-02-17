@@ -34,7 +34,6 @@ class UserDevicesGetCriteria implements CriteriaInterface {
     public function apply($model, RepositoryInterface $repository)
     {
         if ($model instanceof Device) {
-            //$model = User::find($this->userId)->userDevices()->get();
             $model = $model
                     ->leftJoin('user_devices', 'user_devices.device_id', '=', 'devices.id')
                     ->leftJoin('users', 'user_devices.user_id', '=', 'users.id')

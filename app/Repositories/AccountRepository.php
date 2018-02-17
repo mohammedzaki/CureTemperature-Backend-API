@@ -14,7 +14,7 @@ use InfyOm\Generator\Common\BaseRepository;
  * @method Account find($id, $columns = ['*'])
  * @method Account first($columns = ['*'])
 */
-class AccountRepository extends BaseRepository
+class AccountRepository extends MyBaseRepository
 {
     /**
      * @var array

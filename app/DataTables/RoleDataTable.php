@@ -6,8 +6,8 @@ use App\Models\Role;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
-class RoleDataTable extends DataTable
-{
+class RoleDataTable extends DataTable {
+
     /**
      * Build DataTable class.
      *
@@ -40,20 +40,20 @@ class RoleDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->columns($this->getColumns())
-            ->minifiedAjax()
-            ->addAction(['width' => '80px'])
-            ->parameters([
-                'dom'     => 'Bfrtip',
-                'order'   => [[0, 'desc']],
-                'buttons' => [
-                    'create',
-                    'export',
-                    'print',
-                    'reset',
-                    'reload',
-                ],
-            ]);
+                        ->columns($this->getColumns())
+                        ->minifiedAjax()
+                        ->addAction(['width' => '80px'])
+                        ->parameters([
+                            'dom'     => 'Bfrtip',
+                            'order'   => [[0, 'desc']],
+                            'buttons' => [
+                                'create',
+                                'export',
+                                'print',
+                                'reset',
+                                'reload',
+                            ],
+        ]);
     }
 
     /**
@@ -79,4 +79,5 @@ class RoleDataTable extends DataTable
     {
         return 'rolesdatatable_' . time();
     }
+
 }

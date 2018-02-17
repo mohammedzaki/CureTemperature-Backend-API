@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\UserDataTable;
+use App\DataTables\DeviceDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Repositories\UserRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
-use App\Repositories\RoleRepository;
+use App\Repositories\{
+    UserRepository,
+    RoleRepository,
+    AccountRepository
+};
 use Response;
 
 /**
@@ -27,10 +31,14 @@ class UserController extends AppBaseController {
     /** @var  RoleRepository */
     private $roleRepository;
 
-    public function __construct(UserRepository $userRepo, RoleRepository $roleRepo)
+    /** @var  AccountRepository */
+    private $accountRepository;
+
+    public function __construct(UserRepository $userRepo, RoleRepository $roleRepo, AccountRepository $accountRepo)
     {
-        $this->userRepository = $userRepo;
-        $this->roleRepository = $roleRepo;
+        $this->userRepository    = $userRepo;
+        $this->roleRepository    = $roleRepo;
+        $this->accountRepository = $accountRepo;
     }
 
     /**
@@ -46,10 +54,12 @@ class UserController extends AppBaseController {
 
     private function setViewData($user = null)
     {
-        $roles = $this->roleRepository->allForHtmlSelect();
+        $roles    = $this->roleRepository->allForHtmlSelect('display_name');
+        $accounts = $this->accountRepository->allForHtmlSelect();
         return [
-            'roles' => $roles,
-            'user'  => $user,
+            'roles'    => $roles,
+            'user'     => $user,
+            'accounts' => $accounts
         ];
     }
 
@@ -181,6 +191,27 @@ class UserController extends AppBaseController {
         Flash::success('User deleted successfully.');
 
         return redirect(route('users.index'));
+    }
+
+    /**
+     * Remove the specified User from storage.
+     *
+     * @param  int $id
+     *
+     * @return Response
+     * @Get("/{user}/devices", as="user.getUserDevices")
+     */
+    public function devices($id, DeviceDataTable $deviceDataTable)
+    {
+        $user = $this->userRepository->findWithoutFail($id);
+        if (empty($user)) {
+            Flash::error('User not found');
+
+            return redirect(route('users.index'));
+        }
+        //$this->deviceRepository->pushCriteria(new UserDevicesGetCriteria($user));
+        $deviceDataTable->user = $user;
+        return $deviceDataTable->render('devices.index');
     }
 
 }

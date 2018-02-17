@@ -74,25 +74,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Device withoutTrashed()
  * @mixin \Eloquent
  */
-class Device extends Model
-{
+class Device extends Model {
+
     use SoftDeletes;
 
     public $table = 'devices';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
-
     protected $dates = ['deleted_at'];
-
-
     public $fillable = [
         'name',
-        'hospital',
-        'place',
         'serial_number',
-        'device_category_id'
+        'device_category_id',
+        'account_id'
     ];
 
     /**
@@ -101,12 +97,11 @@ class Device extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer',
-        'name' => 'string',
-        'hospital' => 'string',
-        'place' => 'string',
-        'serial_number' => 'string',
-        'device_category_id' => 'integer'
+        'id'                 => 'integer',
+        'name'               => 'string',
+        'serial_number'      => 'string',
+        'device_category_id' => 'integer',
+        'account_id'         => 'integer'
     ];
 
     /**
@@ -115,20 +110,19 @@ class Device extends Model
      * @var array
      */
     public static $rules = [
-        
     ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     **/
+     * */
     public function deviceCategory()
     {
         return $this->belongsTo(\App\Models\DeviceCategory::class);
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     **/
+     * */
     public function deviceAccount()
     {
         return $this->belongsTo(\App\Models\Account::class, 'account_id');
@@ -136,18 +130,18 @@ class Device extends Model
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     **/
+     * */
     public function deviceFeeds()
     {
         return $this->hasMany(\App\Models\DeviceFeeds::class);
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     **/
+     * */
     public function users()
     {
         return $this->belongsToMany(\App\Models\User::class, 'user_devices');
     }
-    
+
 }

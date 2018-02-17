@@ -6,8 +6,11 @@ use App\DataTables\DeviceDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateDeviceRequest;
 use App\Http\Requests\UpdateDeviceRequest;
-use App\Repositories\DeviceRepository;
-use App\Repositories\DeviceCategoryRepository;
+use App\Repositories\{
+    DeviceRepository,
+    DeviceCategoryRepository,
+    AccountRepository
+};
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
@@ -19,18 +22,19 @@ use Response;
  * @Resource("/devices")
  * @Middleware({"cros", "web", "auth", "bindings"})
  */
-class DeviceController extends AppBaseController
-{
+class DeviceController extends AppBaseController {
+
     /** @var  DeviceRepository */
     private $deviceRepository;
 
     /** @var  DeviceCategoryRepository */
     private $deviceCategoryRepository;
-    
-    public function __construct(DeviceRepository $deviceRepo, DeviceCategoryRepository $deviceCategoryRepo)
+
+    public function __construct(DeviceRepository $deviceRepo, DeviceCategoryRepository $deviceCategoryRepo, AccountRepository $accountRepo)
     {
-        $this->deviceRepository = $deviceRepo;
+        $this->deviceRepository         = $deviceRepo;
         $this->deviceCategoryRepository = $deviceCategoryRepo;
+        $this->accountRepository = $accountRepo;
     }
 
     /**
@@ -47,9 +51,11 @@ class DeviceController extends AppBaseController
     private function setViewData($device = null)
     {
         $categories = $this->deviceCategoryRepository->allForHtmlSelect();
+        $accounts   = $this->accountRepository->allForHtmlSelect();
         return [
             'categories' => $categories,
-            'device'  => $device,
+            'device'     => $device,
+            'accounts'   => $accounts
         ];
     }
 
@@ -169,4 +175,5 @@ class DeviceController extends AppBaseController
 
         return redirect(route('devices.index'));
     }
+
 }

@@ -11,11 +11,24 @@ use InfyOm\Generator\Common\BaseRepository;
  */
 abstract class MyBaseRepository extends BaseRepository {
 
-    public function allForHtmlSelect()
+    public function allForHtmlSelect($displayColumn = 'name')
     {
-        return $this->all()->mapWithKeys(function ($item) {
-                    return [$item['id'] => $item['name']];
+        return $this->all()->mapWithKeys(function ($item) use ($displayColumn) {
+                    return [$item['id'] => $item[$displayColumn]];
                 });
+    }
+
+    public function getModelForDatatable()
+    {
+        $this->applyCriteria();
+        $this->applyScope();
+        
+        $results = $this->model;
+        
+        $this->resetModel();
+        $this->resetScope();
+        
+        return $results;
     }
 
 }

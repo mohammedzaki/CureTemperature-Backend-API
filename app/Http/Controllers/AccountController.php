@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\AccountDataTable;
+use App\DataTables\{
+    AccountDataTable,
+    DeviceDataTable,
+    UserDataTable
+};
 use App\Http\Requests;
 use App\Http\Requests\CreateAccountRequest;
 use App\Http\Requests\UpdateAccountRequest;
@@ -18,8 +22,8 @@ use Response;
  * @Resource("/accounts")
  * @Middleware({"cros", "web", "auth", "bindings"})
  */
-class AccountController extends AppBaseController
-{
+class AccountController extends AppBaseController {
+
     /** @var  AccountRepository */
     private $accountRepository;
 
@@ -155,4 +159,49 @@ class AccountController extends AppBaseController
 
         return redirect(route('accounts.index'));
     }
+
+    /**
+     * Remove the specified User from storage.
+     *
+     * @param  int $id
+     *
+     * @return Response
+     * @Get("/{account}/devices", as="user.getAccountDevices")
+     */
+    public function devices($id, DeviceDataTable $deviceDataTable)
+    {
+        $account = $this->accountRepository->findWithoutFail($id);
+
+        if (empty($account)) {
+            Flash::error('Account not found');
+
+            return redirect(route('accounts.index'));
+        }
+        
+        $deviceDataTable->account = $account;
+        return $deviceDataTable->render('devices.index');
+    }
+
+    /**
+     * Remove the specified User from storage.
+     *
+     * @param  int $id
+     *
+     * @return Response
+     * @Get("/{account}/users", as="user.getAccountUsers")
+     */
+    public function users($id, UserDataTable $userDataTable)
+    {
+        $account = $this->accountRepository->findWithoutFail($id);
+
+        if (empty($account)) {
+            Flash::error('Account not found');
+
+            return redirect(route('accounts.index'));
+        }
+        
+        $userDataTable->account = $account;
+        return $userDataTable->render('devices.index');
+    }
+
 }

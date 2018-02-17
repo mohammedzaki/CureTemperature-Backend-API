@@ -7,4 +7,6 @@
 @section('scripts')
     @include('layouts.datatables_js')
     {!! $dataTable->scripts() !!}
+    @include('users.detials_template')
+    @include('devices.detials_template')
 @endsection

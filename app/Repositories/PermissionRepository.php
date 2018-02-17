@@ -14,7 +14,7 @@ use InfyOm\Generator\Common\BaseRepository;
  * @method Permission find($id, $columns = ['*'])
  * @method Permission first($columns = ['*'])
 */
-class PermissionRepository extends BaseRepository
+class PermissionRepository extends MyBaseRepository
 {
     /**
      * @var array

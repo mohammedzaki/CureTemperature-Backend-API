@@ -5,6 +5,7 @@
                 <th>Id</th>
                 <th>Name</th>
                 <th>Email</th>
+                <th>User Role Name</th>
             </tr>
         </thead>
     </table>
@@ -40,7 +41,8 @@
         columns: [
           { data: 'id', name: 'id' },
           { data: 'name', name: 'name' },
-          { data: 'email', name: 'email' }
+          { data: 'email', name: 'email' },
+          { data: 'userRoleName', name: 'userRoleName'}
         ],
         dom: 'Bfrtip',
         buttons: [ 'export' ]

@@ -6,21 +6,22 @@ use Prettus\Repository\Contracts\CriteriaInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;
 use App\Models\{
     Device,
-    User
+    User,
+    Role
 };
 
 /**
- * Class UserDevicesGetCriteriaCriteria.
+ * Class PreferedDevicesCriteria.
  *
  * @package namespace App\Criteria;
  */
-class UserDevicesGetCriteria implements CriteriaInterface {
+class PreferedDevicesCriteria implements CriteriaInterface {
 
-    private $user;
+    private $devicesId;
 
-    public function __construct(User $user)
+    public function __construct(array $devicesId)
     {
-        $this->user = $user;
+        $this->devicesId = $devicesId;
     }
 
     /**
@@ -34,12 +35,7 @@ class UserDevicesGetCriteria implements CriteriaInterface {
     public function apply($model, RepositoryInterface $repository)
     {
         if ($model instanceof Device) {
-            $model = $model
-                    ->leftJoin('user_devices', 'user_devices.device_id', '=', 'devices.id')
-                    ->leftJoin('users', 'user_devices.user_id', '=', 'users.id')
-                    ->distinct()
-                    ->select('devices.*')
-                    ->where('users.id', '=', $this->user->id);
+            $model = $model->whereIn('id', $this->devicesId);
         }
 
         return $model;

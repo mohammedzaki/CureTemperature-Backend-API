@@ -44,6 +44,11 @@ class Role extends EntrustRole {
         'description'
     ];
 
+    const OWNER            = 'owner';
+    const ADMIN            = 'admin';
+    const MOBILE_APP_USER  = 'mobile_app_user';
+    const MOBILE_APP_ADMIN = 'mobile_app_admin';
+
     /**
      * The attributes that should be casted to native types.
      *
@@ -67,14 +72,16 @@ class Role extends EntrustRole {
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      * */
-    public function permissions() {
+    public function permissions()
+    {
         return $this->belongsToMany(\App\Models\Permission::class, 'permission_role');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      * */
-    public function users() {
+    public function users()
+    {
         return $this->belongsToMany(\App\Models\User::class, 'role_user');
     }
 

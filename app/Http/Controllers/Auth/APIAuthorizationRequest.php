@@ -22,10 +22,50 @@ use App\Models\User;
 class APIAuthorizationRequest {
 
     /**
+     * @SWG\Definition (
+     *      definition="LoginData",
+     *      required={""},
+     *      @SWG\Property(
+     *          property="client_id",
+     *          description="client_id",
+     *          type="string"
+     *      ),
+     *      @SWG\Property(
+     *          property="client_secret",
+     *          description="client_secret",
+     *          type="string"
+     *      ),
+     *      @SWG\Property(
+     *          property="username",
+     *          description="username",
+     *          type="string"
+     *      ),
+     *      @SWG\Property(
+     *          property="password",
+     *          description="password",
+     *          type="string"
+     *      )
+     * )
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
      * @Post("/api/apiLogin")
+     * 
+     * @SWG\Post(
+     *   tags={"User"},
+     *   path="/apiLogin",
+     *   operationId="apiLogin",
+     *   produces={"application/json"},
+     *   consumes={"application/json"},
+     *   @SWG\Parameter(
+     *     in="body",
+     *     name="userLoginData",
+     *     description="user Login Data",
+     *     required=true,
+     *     @SWG\Schema(ref="#/definitions/LoginData")
+     *   ),
+     *   @SWG\Response(response="default", ref="#/responses/SuccessResponse")
+     * )
      */
     function apiLogin(Request $request)
     {

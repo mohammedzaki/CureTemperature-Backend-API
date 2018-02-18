@@ -35,13 +35,33 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *          type="string"
  *      ),
  *      @SWG\Property(
- *          property="remember_token",
- *          description="remember_token",
+ *          property="device_token",
+ *          description="device_token",
  *          type="string"
  *      ),
  *      @SWG\Property(
- *          property="device_token",
- *          description="device_token",
+ *          property="rememberToken",
+ *          description="rememberToken",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="accessToken",
+ *          description="accessToken",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="expiresIn",
+ *          description="expiresIn",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="refreshToken",
+ *          description="refreshToken",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="tokenType",
+ *          description="tokenType",
  *          type="string"
  *      )
  * )
@@ -51,6 +71,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $password
  * @property string $remember_token
  * @property string $device_token
+ * @property int $account_id
  * @property \Carbon\Carbon|null $deleted_at
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
@@ -59,6 +80,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Role[] $roles
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[] $tokens
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\UserDevice[] $userDevices
+ * @property-read \App\Models\Account|null $account
  * @method static bool|null forceDelete()
  * @method static \Illuminate\Database\Query\Builder|\App\Models\User onlyTrashed()
  * @method static bool|null restore()
@@ -144,6 +166,14 @@ class User extends Authenticatable {
     public function userDevices()
     {
         return $this->belongsToMany(\App\Models\Device::class, 'user_devices');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * */
+    public function account()
+    {
+        return $this->belongsTo(\App\Models\Account::class, 'account_id');
     }
 
 }

@@ -39,34 +39,6 @@ class DeviceFeedsAPIController extends AppBaseController
     /**
      * @param Request $request
      * @return Response
-     *
-     * @SWG\Get(
-     *      path="/deviceFeeds",
-     *      summary="Get a listing of the DeviceFeeds.",
-     *      tags={"DeviceFeeds"},
-     *      description="Get all DeviceFeeds",
-     *      produces={"application/json"},
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/DeviceFeeds")
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
      */
     public function index(Request $request)
     {
@@ -80,40 +52,6 @@ class DeviceFeedsAPIController extends AppBaseController
     /**
      * @param CreateDeviceFeedsAPIRequest $request
      * @return Response
-     *
-     * @SWG\Post(
-     *      path="/deviceFeeds",
-     *      summary="Store a newly created DeviceFeeds in storage",
-     *      tags={"DeviceFeeds"},
-     *      description="Store DeviceFeeds",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="body",
-     *          in="body",
-     *          description="DeviceFeeds that should be stored",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/DeviceFeeds")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/DeviceFeeds"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
      */
     public function store(CreateDeviceFeedsAPIRequest $request)
     {
@@ -155,40 +93,6 @@ class DeviceFeedsAPIController extends AppBaseController
     /**
      * @param int $id
      * @return Response
-     *
-     * @SWG\Get(
-     *      path="/deviceFeeds/{id}",
-     *      summary="Display the specified DeviceFeeds",
-     *      tags={"DeviceFeeds"},
-     *      description="Get DeviceFeeds",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of DeviceFeeds",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/DeviceFeeds"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
      */
     public function show($id)
     {
@@ -206,47 +110,6 @@ class DeviceFeedsAPIController extends AppBaseController
      * @param int $id
      * @param UpdateDeviceFeedsAPIRequest $request
      * @return Response
-     *
-     * @SWG\Put(
-     *      path="/deviceFeeds/{id}",
-     *      summary="Update the specified DeviceFeeds in storage",
-     *      tags={"DeviceFeeds"},
-     *      description="Update DeviceFeeds",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of DeviceFeeds",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Parameter(
-     *          name="body",
-     *          in="body",
-     *          description="DeviceFeeds that should be updated",
-     *          required=false,
-     *          @SWG\Schema(ref="#/definitions/DeviceFeeds")
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  ref="#/definitions/DeviceFeeds"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
      */
     public function update($id, UpdateDeviceFeedsAPIRequest $request)
     {
@@ -267,40 +130,6 @@ class DeviceFeedsAPIController extends AppBaseController
     /**
      * @param int $id
      * @return Response
-     *
-     * @SWG\Delete(
-     *      path="/deviceFeeds/{id}",
-     *      summary="Remove the specified DeviceFeeds from storage",
-     *      tags={"DeviceFeeds"},
-     *      description="Delete DeviceFeeds",
-     *      produces={"application/json"},
-     *      @SWG\Parameter(
-     *          name="id",
-     *          description="id of DeviceFeeds",
-     *          type="integer",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @SWG\Response(
-     *          response=200,
-     *          description="successful operation",
-     *          @SWG\Schema(
-     *              type="object",
-     *              @SWG\Property(
-     *                  property="success",
-     *                  type="boolean"
-     *              ),
-     *              @SWG\Property(
-     *                  property="data",
-     *                  type="string"
-     *              ),
-     *              @SWG\Property(
-     *                  property="message",
-     *                  type="string"
-     *              )
-     *          )
-     *      )
-     * )
      */
     public function destroy($id)
     {

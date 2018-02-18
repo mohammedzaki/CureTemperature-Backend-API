@@ -7,7 +7,7 @@ use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 use App\Repositories\DeviceRepository;
 use App\Criteria\{
-    UserDevicesGetCriteria,
+    UserDevicesCriteria,
     AccountFilterCriteria,
     CategoryFilterCriteria
 };
@@ -49,7 +49,7 @@ class DeviceDataTable extends DataTable {
     {
         if (isset($this->user)) {
             $this->deviceRepository = new DeviceRepository(app());
-            $this->deviceRepository->pushCriteria(new UserDevicesGetCriteria($this->user));
+            $this->deviceRepository->pushCriteria(new UserDevicesCriteria($this->user));
             return $this->deviceRepository->getModelForDatatable();
         } elseif (isset($this->account)) {
             $this->deviceRepository = new DeviceRepository(app());

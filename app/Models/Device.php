@@ -23,19 +23,34 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *          type="string"
  *      ),
  *      @SWG\Property(
- *          property="hospital",
- *          description="hospital",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="place",
- *          description="place",
- *          type="string"
- *      ),
- *      @SWG\Property(
  *          property="serial_number",
  *          description="serial_number",
  *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="description",
+ *          description="description",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="temp",
+ *          description="temp",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="percentage",
+ *          description="percentage",
+ *          type="integer"
+ *      ),
+ *      @SWG\Property(
+ *          property="alarm",
+ *          description="alarm",
+ *          type="boolean"
+ *      ),
+ *      @SWG\Property(
+ *          property="reverse",
+ *          description="reverse",
+ *          type="boolean"
  *      ),
  *      @SWG\Property(
  *          property="device_category_id",
@@ -87,9 +102,15 @@ class Device extends Model {
     public $fillable = [
         'name',
         'serial_number',
+        'description',
+        'temp',
+        'percentage',
+        'reverse',
+        'alarm',
         'device_category_id',
         'account_id'
     ];
+    public $position = '';
 
     /**
      * The attributes that should be casted to native types.

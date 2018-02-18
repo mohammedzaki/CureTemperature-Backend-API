@@ -160,8 +160,12 @@ class UserController extends AppBaseController {
         $input = $request->all();
         if (!empty($input['password'])) {
             $input['password'] = bcrypt($input['password']);
+        } else {
+            unset($input['password']);
         }
-
+        $user->roles()->detach();
+        $user->roles()->attach($request->role);
+        
         $user = $this->userRepository->update($input, $id);
 
         Flash::success('User updated successfully.');

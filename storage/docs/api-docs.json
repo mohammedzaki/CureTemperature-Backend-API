@@ -15,14 +15,70 @@
         "https"
     ],
     "paths": {
+        "/users/save-device-token/{userId}": {
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Store a newly created resource in storage.",
+                "description": "This can only be done by the logged in user.",
+                "operationId": "saveUserDeviceToken",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "deviceToken",
+                        "in": "query",
+                        "description": "mobile device token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceType",
+                        "in": "query",
+                        "description": "mobile device type",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "android",
+                            "ios",
+                            "win"
+                        ]
+                    },
+                    {
+                        "$ref": "#/parameters/userId"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "$ref": "#/responses/SuccessResponse"
+                    }
+                }
+            }
+        },
         "/userDevices/{userId}": {
             "get": {
                 "tags": [
                     "UserDevices"
                 ],
+                "operationId": "getUserDevices",
                 "parameters": [
                     {
                         "$ref": "#/parameters/userId"
+                    },
+                    {
+                        "name": "devicesId",
+                        "in": "query",
+                        "description": "List of devices IDs",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        }
                     }
                 ],
                 "responses": {
@@ -30,612 +86,91 @@
                         "$ref": "#/responses/device"
                     }
                 }
-            },
-            "parameters": [
-                {
-                    "$ref": "#/parameters/userId"
-                }
-            ]
-        },
-        "/deviceFeeds": {
-            "get": {
-                "tags": [
-                    "DeviceFeeds"
-                ],
-                "summary": "Get a listing of the DeviceFeeds.",
-                "description": "Get all DeviceFeeds",
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/definitions/DeviceFeeds"
-                                    }
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "DeviceFeeds"
-                ],
-                "summary": "Store a newly created DeviceFeeds in storage",
-                "description": "Store DeviceFeeds",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "body",
-                        "in": "body",
-                        "description": "DeviceFeeds that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/DeviceFeeds"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/DeviceFeeds"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
             }
         },
-        "/deviceFeeds/{id}": {
-            "get": {
-                "tags": [
-                    "DeviceFeeds"
-                ],
-                "summary": "Display the specified DeviceFeeds",
-                "description": "Get DeviceFeeds",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of DeviceFeeds",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/DeviceFeeds"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "DeviceFeeds"
-                ],
-                "summary": "Update the specified DeviceFeeds in storage",
-                "description": "Update DeviceFeeds",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of DeviceFeeds",
-                        "required": true,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "body",
-                        "in": "body",
-                        "description": "DeviceFeeds that should be updated",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/DeviceFeeds"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/DeviceFeeds"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "DeviceFeeds"
-                ],
-                "summary": "Remove the specified DeviceFeeds from storage",
-                "description": "Delete DeviceFeeds",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of DeviceFeeds",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "string"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/users": {
-            "get": {
-                "tags": [
-                    "User"
-                ],
-                "summary": "Get a listing of the Users.",
-                "description": "Get all Users",
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/definitions/User"
-                                    }
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
+        "/apiLogin": {
             "post": {
                 "tags": [
                     "User"
                 ],
-                "summary": "Store a newly created User in storage",
-                "description": "Store User",
+                "operationId": "apiLogin",
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
                 "parameters": [
                     {
-                        "name": "body",
+                        "name": "userLoginData",
                         "in": "body",
-                        "description": "User that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/User"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/User"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/users/{id}": {
-            "get": {
-                "tags": [
-                    "User"
-                ],
-                "summary": "Display the specified User",
-                "description": "Get User",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of User",
+                        "description": "user Login Data",
                         "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
                         "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/User"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "User"
-                ],
-                "summary": "Update the specified User in storage",
-                "description": "Update User",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of User",
-                        "required": true,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "body",
-                        "in": "body",
-                        "description": "User that should be updated",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/User"
+                            "$ref": "#/definitions/LoginData"
                         }
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/User"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "User"
-                ],
-                "summary": "Remove the specified User from storage",
-                "description": "Delete User",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of User",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "string"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/userCates": {
-            "get": {
-                "tags": [
-                    "UserCate"
-                ],
-                "summary": "Get a listing of the UserCates.",
-                "description": "Get all UserCates",
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/definitions/UserCate"
-                                    }
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "UserCate"
-                ],
-                "summary": "Store a newly created UserCate in storage",
-                "description": "Store UserCate",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "body",
-                        "in": "body",
-                        "description": "UserCate that should be stored",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/UserCate"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/UserCate"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/userCates/{id}": {
-            "get": {
-                "tags": [
-                    "UserCate"
-                ],
-                "summary": "Display the specified UserCate",
-                "description": "Get UserCate",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of UserCate",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/UserCate"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "UserCate"
-                ],
-                "summary": "Update the specified UserCate in storage",
-                "description": "Update UserCate",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of UserCate",
-                        "required": true,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "body",
-                        "in": "body",
-                        "description": "UserCate that should be updated",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/UserCate"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/UserCate"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "UserCate"
-                ],
-                "summary": "Remove the specified UserCate from storage",
-                "description": "Delete UserCate",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of UserCate",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "string"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
+                    "default": {
+                        "$ref": "#/responses/SuccessResponse"
                     }
                 }
             }
         }
     },
     "definitions": {
+        "LoginData": {
+            "required": [
+                ""
+            ],
+            "properties": {
+                "client_id": {
+                    "description": "client_id",
+                    "type": "string"
+                },
+                "client_secret": {
+                    "description": "client_secret",
+                    "type": "string"
+                },
+                "username": {
+                    "description": "username",
+                    "type": "string"
+                },
+                "password": {
+                    "description": "password",
+                    "type": "string"
+                }
+            }
+        },
+        "Account": {
+            "required": [
+                ""
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "name": {
+                    "description": "name",
+                    "type": "string"
+                },
+                "place": {
+                    "description": "place",
+                    "type": "string"
+                },
+                "email": {
+                    "description": "email",
+                    "type": "string"
+                },
+                "phone": {
+                    "description": "phone",
+                    "type": "string"
+                }
+            }
+        },
         "Device": {
             "required": [
                 ""
@@ -650,17 +185,29 @@
                     "description": "name",
                     "type": "string"
                 },
-                "hospital": {
-                    "description": "hospital",
-                    "type": "string"
-                },
-                "place": {
-                    "description": "place",
-                    "type": "string"
-                },
                 "serial_number": {
                     "description": "serial_number",
                     "type": "string"
+                },
+                "description": {
+                    "description": "description",
+                    "type": "string"
+                },
+                "temp": {
+                    "description": "temp",
+                    "type": "string"
+                },
+                "percentage": {
+                    "description": "percentage",
+                    "type": "integer"
+                },
+                "alarm": {
+                    "description": "alarm",
+                    "type": "boolean"
+                },
+                "reverse": {
+                    "description": "reverse",
+                    "type": "boolean"
                 },
                 "device_category_id": {
                     "description": "device_category_id",
@@ -806,49 +353,29 @@
                     "description": "password",
                     "type": "string"
                 },
-                "remember_token": {
-                    "description": "remember_token",
-                    "type": "string"
-                },
                 "device_token": {
                     "description": "device_token",
                     "type": "string"
-                }
-            }
-        },
-        "UserCate": {
-            "required": [
-                ""
-            ],
-            "properties": {
-                "id": {
-                    "description": "id",
-                    "type": "integer",
-                    "format": "int32"
                 },
-                "name": {
-                    "description": "name",
+                "rememberToken": {
+                    "description": "rememberToken",
                     "type": "string"
                 },
-                "min_temperature": {
-                    "description": "min_temperature",
-                    "type": "number",
-                    "format": "float"
+                "accessToken": {
+                    "description": "accessToken",
+                    "type": "string"
                 },
-                "max_temperature": {
-                    "description": "max_temperature",
-                    "type": "number",
-                    "format": "float"
+                "expiresIn": {
+                    "description": "expiresIn",
+                    "type": "string"
                 },
-                "alarm_times": {
-                    "description": "alarm_times",
-                    "type": "integer",
-                    "format": "int32"
+                "refreshToken": {
+                    "description": "refreshToken",
+                    "type": "string"
                 },
-                "alarm_frequency": {
-                    "description": "alarm_frequency",
-                    "type": "integer",
-                    "format": "int32"
+                "tokenType": {
+                    "description": "tokenType",
+                    "type": "string"
                 }
             }
         },
@@ -928,6 +455,49 @@
                 },
                 "type": "object"
             }
+        },
+        "SuccessResponse": {
+            "description": "successful operation",
+            "schema": {
+                "properties": {
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "returnObject": {
+                        "type": "object"
+                    },
+                    "objectType": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "ExceptionResponse": {
+            "description": "Exception",
+            "schema": {
+                "properties": {
+                    "code": {
+                        "type": "integer"
+                    },
+                    "exception": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "errors": {
+                        "type": "string"
+                    },
+                    "trace": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
         }
     },
     "securityDefinitions": {
@@ -940,5 +510,13 @@
                 "write:pets": "modify pets in your account"
             }
         }
-    }
+    },
+    "security": [
+        {
+            "cure_auth2": [
+                "write:pets",
+                "read:pets"
+            ]
+        }
+    ]
 }

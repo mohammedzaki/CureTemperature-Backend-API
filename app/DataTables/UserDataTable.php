@@ -11,7 +11,7 @@ class UserDataTable extends MyBaseDataTable {
 
     public $account;
     public $userRepository;
-    
+
     /**
      * Build DataTable class.
      *
@@ -24,8 +24,14 @@ class UserDataTable extends MyBaseDataTable {
 
         return $dataTable
                         //->addColumn('details', 'users.datatables_details')
-                        ->addColumn('devices_details_url', function($user) {
+                        ->addColumn('devices_details_url', function(User $user) {
                             return url("users/{$user->id}/devices");
+                        })
+                        ->addColumn('accountName', function (User $user) {
+                            return $user->account ? $user->account->name : '';
+                        })
+                        ->addColumn('userRoleName', function (User $user) {
+                            return $user->roles->first() ? $user->roles->first()->display_name : '';
                         })
                         ->addColumn('action', 'users.datatables_actions');
     }
@@ -82,9 +88,8 @@ class UserDataTable extends MyBaseDataTable {
             'id',
             'name',
             'email',
-                //'password',
-                //'remember_token',
-                //'device_token'
+            'accountName',
+            'userRoleName'
         ];
     }
 

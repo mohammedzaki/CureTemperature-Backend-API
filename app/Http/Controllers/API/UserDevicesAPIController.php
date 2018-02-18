@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Requests\API\CreateUserDevicesAPIRequest;
-use App\Http\Requests\API\UpdateUserDevicesAPIRequest;
-use App\Models\UserDevices;
-use App\Models\User;
-use App\Repositories\{UserDevicesRepository,
-DeviceRepository};
-use App\Criteria\UserDevicesGetCriteria;
-use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
-use InfyOm\Generator\Criteria\LimitOffsetCriteria;
+use Illuminate\Http\Request;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Response;
+use App\Models\{
+    User
+};
+use App\Repositories\{
+    UserDevicesRepository,
+    DeviceRepository
+};
+use App\Criteria\{
+    UserDevicesCriteria,
+    PreferedDevicesCriteria
+};
 
 /**
  * Class UserDevicesController
@@ -21,25 +23,21 @@ use Response;
  * @Controller(prefix="/api/userDevices")
  * @Middleware({"cros", "api", "bindings"})
  * 
- * @SWG\Path(
- *   path="/userDevices/{userId}",
- *   @SWG\Parameter(ref="#/parameters/userId")
- * )
  */
 class UserDevicesAPIController extends AppBaseController {
 
     /** @var  UserDevicesRepository */
     private $userDevicesRepository;
-    
+
     /** @var  UserDevicesRepository */
     private $deviceRepository;
 
     public function __construct(UserDevicesRepository $userDevicesRepo, DeviceRepository $deviceRepo)
     {
         $this->userDevicesRepository = $userDevicesRepo;
-        $this->deviceRepository = $deviceRepo;
+        $this->deviceRepository      = $deviceRepo;
     }
-
+    
 
     public function setPreferedDevice(Request $request, $userId)
     {
@@ -55,14 +53,28 @@ class UserDevicesAPIController extends AppBaseController {
      * @SWG\Get(
      *   tags={"UserDevices"},
      *   path="/userDevices/{userId}",
+     *   operationId="getUserDevices",
      *   @SWG\Parameter(ref="#/parameters/userId"),
+     *   @SWG\Parameter(
+     *     in="query",
+     *     name="devicesId",
+     *     description="List of devices IDs",
+     *     required=false,
+     *     type="array",
+     *     @SWG\Items(type="integer")
+     *   ),
      *   @SWG\Response(response="default", ref="#/responses/device")
      * )
      * @Get("/{user}", as="userDevices.getUserDevices")
      */
     public function getUserDevices(Request $request, User $user)
     {
-        $this->deviceRepository->pushCriteria(new UserDevicesGetCriteria($user));
+        if (isset($request->devicesId)) {
+            $integerIDs = array_map('intval', explode(',', $request->devicesId));
+            $this->deviceRepository->pushCriteria(new PreferedDevicesCriteria($integerIDs));
+        } else {
+            $this->deviceRepository->pushCriteria(new UserDevicesCriteria($user));
+        }
         $userDevices = $this->deviceRepository->all();
         return $this->sendResponse($userDevices->toArray(), 'User Devices retrieved successfully');
     }

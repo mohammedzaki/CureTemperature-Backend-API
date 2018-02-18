@@ -71,8 +71,8 @@ class DeviceCategoryDataTable extends DataTable {
             'name',
             'min_temperature',
             'max_temperature',
-            'alarm_times',
-            'alarm_frequency'
+                //'alarm_times',
+                //'alarm_frequency'
         ];
     }
 

@@ -16,7 +16,7 @@
     {!! Form::number('max_temperature', null, ['class' => 'form-control', 'step' => '0.01']) !!}
 </div>
 
-<!-- Alarm Times Field -->
+{{-- <!-- Alarm Times Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('alarm_times', 'Alarm Times:') !!}
     {!! Form::number('alarm_times', null, ['class' => 'form-control']) !!}
@@ -26,7 +26,7 @@
 <div class="form-group col-sm-6">
     {!! Form::label('alarm_frequency', 'Alarm Frequency:') !!}
     {!! Form::number('alarm_frequency', null, ['class' => 'form-control']) !!}
-</div>
+</div> --}}
 
 <!-- Submit Field -->
 <div class="form-group col-sm-12">

@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>Apex App Home</title>
+        <title>Cure-Temp App Home</title>
         <!-- Favicon -->
         <link rel="shortcut icon" type="image/icon" href="assets/images/favicon.ico"/>
         <!-- Font Awesome -->
@@ -48,7 +48,7 @@
                         <!-- Start Logo -->
                         <div class="mu-logo-area">
                             <!-- text based logo -->
-                            <a class="mu-logo" href="#">Apex App</a>
+                            <a class="mu-logo" href="#">Cure-Temp App</a>
                             <!-- image based logo -->
                             <!-- <a class="mu-logo" href="#"><img src="assets/images/logo.png" alt="logo img"></a> -->
                         </div>
@@ -62,7 +62,6 @@
 
                             <div class="mu-header-featured-content">
                                 <h1>Welcome To <span>Cure-Temp App</span></h1>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto nisi, consectetur odit voluptate labore veniam, neque iure cumque aut recusandae iusto. Aliquid quos vel optio dolore consequuntur accusantium autem quaerat!</p>
 
                                 <div class="mu-app-download-area">
                                     <h4>Download The App</h4>
@@ -92,10 +91,8 @@
                     <ul>
                         <li><a href="#mu-header">Header</a></li>
                         <li><a href="#mu-feature">App Feature</a></li>
-                        <li><a href="#mu-video">Promo Video</a></li>
                         <li><a href="#mu-apps-screenshot">Apps Screenshot</a></li>
                         <li><a href="#mu-download">Download</a></li>
-                        <li><a href="#mu-faq">FAQ</a></li>
                         <li><a href="#mu-contact">Get In Touch</a></li>
                     </ul>
                 </nav>
@@ -119,7 +116,6 @@
                                 <div class="mu-title-area">
                                     <h2 class="mu-title">OUR APP FEATURES</h2>
                                     <span class="mu-title-dot"></span>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis unde, ut sapiente et voluptatum facilis consectetur incidunt provident asperiores at necessitatibus nulla sequi voluptas libero quasi explicabo veritatis minima porro.</p>
                                 </div>
 
                                 <!-- Start Feature Content -->
@@ -142,7 +138,6 @@
                                                     </div>
                                                     <div class="media-body">
                                                         <h3 class="media-heading">Responsive Design</h3>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic at, omnis neque illum accusamus delectus consectetur perspiciatis fugiat ex veniam sit soluta iste, reprehenderit laboriosam!</p>
                                                     </div>
                                                 </div>
                                                 <!-- End single feature item -->
@@ -156,7 +151,6 @@
                                                     </div>
                                                     <div class="media-body">
                                                         <h3 class="media-heading">Easy To Customize</h3>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis provident in voluptatum nihil suscipit molestias, excepturi blanditiis corrupti error tenetur ab, voluptates architecto nemo.</p>
                                                     </div>
                                                 </div>
                                                 <!-- End single feature item -->
@@ -170,21 +164,6 @@
                                                     </div>
                                                     <div class="media-body">
                                                         <h3 class="media-heading">Excellent Performance</h3>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta veniam eius, ullam nisi repellendus deserunt distinctio, eveniet libero velit quo voluptatem sequi, ipsa asperiores ad? Facilis molestiae cum aliquam.</p>
-                                                    </div>
-                                                </div>
-                                                <!-- End single feature item -->
-
-                                                <!-- Start single feature item -->
-                                                <div class="media">
-                                                    <div class="media-left">
-                                                        <button class="btn mu-feature-btn" type="button">
-                                                            <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <h3 class="media-heading">GPS Tracking</h3>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque repudiandae eveniet facere natus recusandae, sapiente iste veritatis molestiae. Recusandae veniam officia asperiores reprehenderit earum.</p>
                                                     </div>
                                                 </div>
                                                 <!-- End single feature item -->
@@ -202,33 +181,6 @@
             </section>
             <!-- End Feature -->
 
-            <!-- Start Video -->
-            <section id="mu-video">
-                <div class="mu-video-overlay">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="mu-video-area">
-                                    <h2>Watch Promo Video</h2>
-                                    <a class="mu-video-play-btn" href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Start Video content -->
-                <div class="mu-video-content">
-                    <div class="mu-video-iframe-area">
-                        <a class="mu-video-close-btn" href="#"><i class="fa fa-times" aria-hidden="true"></i></a>
-                        <iframe class="mu-video-iframe" width="854" height="480" src="https://www.youtube.com/embed/9r40_ffCZ_I" frameborder="0" allowfullscreen></iframe> 
-                    </div>
-                </div>
-                <!-- End Video content -->
-
-            </section>
-            <!-- End Video -->
-
             <!-- Start Apps Screenshot -->
             <section id="mu-apps-screenshot">
                 <div class="container">
@@ -239,7 +191,6 @@
                                 <div class="mu-title-area">
                                     <h2 class="mu-title">APPS SCREENSHOT</h2>
                                     <span class="mu-title-dot"></span>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis unde, ut sapiente et voluptatum facilis consectetur incidunt provident asperiores at necessitatibus nulla sequi voluptas libero quasi explicabo veritatis minima porro.</p>
                                 </div>
 
 
@@ -310,14 +261,12 @@
                                 <div class="mu-title-area">
                                     <h2 class="mu-title">GET THE APP</h2>
                                     <span class="mu-title-dot"></span>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis unde, ut sapiente et voluptatum facilis consectetur incidunt provident asperiores at necessitatibus nulla sequi voluptas libero quasi explicabo veritatis minima porro.</p>
                                 </div>
 
 
                                 <div class="mu-download-content">
-                                    <a class="mu-apple-btn" href="#"><i class="fa fa-apple"></i><span>apple store</span></a>
-                                    <a class="mu-google-btn" href="#"><i class="fa fa-android"></i><span>google play</span></a>
-                                    <a class="mu-windows-btn" href="#"><i class="fa fa-windows"></i><span>windows store</span></a>
+                                    <a class="mu-apple-btn" href="itms-services://?action=download-manifest&url=https://cure-temperature.herokuapp.com//mobileapp/manifest.plist"><i class="fa fa-apple"></i><span>iPhone</span></a>
+                                    <a class="mu-google-btn" href="{{ url('mobileapp/android-debug.apk') }}"><i class="fa fa-android"></i><span>Android</span></a>
                                 </div>
 
 
@@ -327,109 +276,6 @@
                 </div>
             </section>
             <!-- End Download -->
-
-            <!-- Start FAQ -->
-            <section id="mu-faq">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="mu-faq-area">
-
-                                <div class="mu-title-area">
-                                    <h2 class="mu-title">FAQ</h2>
-                                    <span class="mu-title-dot"></span>
-                                </div>
-
-
-                                <div class="mu-faq-content">
-
-                                    <div class="panel-group" id="accordion">
-
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true">
-                                                        <span class="fa fa-minus"></span> What is Apex App? 
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseOne" class="panel-collapse collapse in">
-                                                <div class="panel-body">
-                                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                                                        <span class="fa fa-plus"></span> How do I setup this App? 
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseTwo" class="panel-collapse collapse">
-                                                <div class="panel-body">
-                                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                                                        <span class="fa fa-plus"></span> Does it cost anything to become a member? 
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseThree" class="panel-collapse collapse">
-                                                <div class="panel-body">
-                                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-                                                        <span class="fa fa-plus"></span> What is your policy regarding privacy? 
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseFour" class="panel-collapse collapse">
-                                                <div class="panel-body">
-                                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
-                                                        <span class="fa fa-plus"></span> Are there more help resources available? 
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseFive" class="panel-collapse collapse">
-                                                <div class="panel-body">
-                                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- End FAQ -->
 
 
             <!-- Start Contact -->
@@ -442,7 +288,6 @@
                                 <div class="mu-title-area">
                                     <h2 class="mu-heading-title">GET IN TOUCH</h2>
                                     <span class="mu-title-dot"></span>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p>
                                 </div>
 
 
@@ -474,24 +319,24 @@
                                                 <div class="mu-contact-right-single">
                                                     <div class="mu-icon"><i class="fa fa-map-marker"></i></div>
                                                     <p><strong>Office Location</strong></p>
-                                                    <p>Dooley Branch Rd Millen, GA 30442, USA</p>
+                                                    <p>10, Al-Tahrir St., Sheraton Buildings, Heliopolis, Cairo, Egypt.</p>
                                                 </div>
 
                                                 <div class="mu-contact-right-single">
                                                     <div class="mu-icon"><i class="fa fa-phone"></i></div>
                                                     <p><strong>Phone Number</strong></p>
-                                                    <p>+90 987 678 9834</p>
-                                                    <p>+90 567 098 785</p>
+                                                    <p>Tel: +20 22 690 835</p>
+                                                    <p>Fax: +20 22 690 834</p>
                                                 </div>
 
                                                 <div class="mu-contact-right-single">
                                                     <div class="mu-icon"><i class="fa fa-envelope"></i></div>
                                                     <p><strong>Email Address</strong></p>
-                                                    <p>contact@domain.com</p>
-                                                    <p>support@domain.com</p>
+                                                    <p>info@curegroup.net</p>
+                                                    <p>ehab.serag@curegroup.net</p>
                                                 </div>
 
-                                                <div class="mu-contact-right-single">
+                                                <!--<div class="mu-contact-right-single">
                                                     <div class="mu-social-media">
                                                         <a href="#"><i class="fa fa-facebook"></i></a>
                                                         <a href="#"><i class="fa fa-twitter"></i></a>
@@ -499,7 +344,7 @@
                                                         <a href="#"><i class="fa fa-linkedin"></i></a>
                                                         <a href="#"><i class="fa fa-youtube"></i></a>
                                                     </div>
-                                                </div>
+                                                </div>-->
 
                                             </div>
                                         </div>		
@@ -524,7 +369,7 @@
         <footer id="mu-footer" role="contentinfo">
             <div class="container">
                 <div class="mu-footer-area">
-                    <p class="mu-copy-right">&copy; Copyright <a rel="nofollow" href="http://markups.io">markups.io</a>. All right reserved.</p>
+                    <p class="mu-copy-right">&copy; Copyright <a rel="nofollow" href="http://www.curegroup.net">markups.io</a>. All right reserved.</p>
                 </div>
             </div>
 

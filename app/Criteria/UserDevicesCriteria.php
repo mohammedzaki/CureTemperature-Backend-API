@@ -36,8 +36,12 @@ class UserDevicesCriteria implements CriteriaInterface {
     {
         if ($model instanceof Device) {
             $userRole = $this->user->roles->first();
-            if (!empty($userRole) && $userRole->name == Role::MOBILE_APP_ADMIN) {
-                $model = $model->where('account_id', '=', $this->user->account_id);
+            if (!empty($userRole) && $userRole->name != Role::MOBILE_APP_USER) {
+                if ($userRole->name == Role::MOBILE_APP_ADMIN) {
+                    $model = $model->where('account_id', '=', $this->user->account_id);
+                } elseif ($userRole->name == Role::ADMIN || $userRole->name == Role::OWNER) {
+                    $model = $model;
+                }
             } else {
                 $model = $model
                         ->leftJoin('user_devices', 'user_devices.device_id', '=', 'devices.id')

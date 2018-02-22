@@ -17,15 +17,37 @@ class HomeController extends Controller {
      * @Get("/admin", as="admin")
      * @Middleware({"auth"})
      */
-    public function index() {
-        return view('home');
+    public function admin() {
+        return view('admin');
+    }
+    
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     * @Get("/home", as="home")
+     * @Middleware({"auth"})
+     */
+    public function home() {
+        return view('app-download');
+    }
+    
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     * @Get("/", as="appDownload")
+     * @Middleware({"guest"})
+     */
+    public function appDownload() {
+        return view('app-download');
     }
 
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
-     * @Get("/", as="welcome")
+     * @Get("/welcome", as="welcome")
      * @Middleware({"guest"})
      */
     public function welcome() {

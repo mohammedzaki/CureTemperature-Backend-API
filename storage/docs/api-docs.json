@@ -395,6 +395,19 @@
                     "format": "int32"
                 }
             }
+        },
+        "UesrDevicesResponse": {
+            "properties": {
+                "account": {
+                    "type": "object"
+                },
+                "devices": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Device"
+                    }
+                }
+            }
         }
     },
     "parameters": {
@@ -444,10 +457,7 @@
                         "type": "boolean"
                     },
                     "data": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/definitions/Device"
-                        }
+                        "type": "object"
                     },
                     "message": {
                         "type": "string"

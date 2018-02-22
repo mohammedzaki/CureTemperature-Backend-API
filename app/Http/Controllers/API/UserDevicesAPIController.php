@@ -76,7 +76,10 @@ class UserDevicesAPIController extends AppBaseController {
             $this->deviceRepository->pushCriteria(new UserDevicesCriteria($user));
         }
         $userDevices = $this->deviceRepository->all();
-        return $this->sendResponse($userDevices->toArray(), 'User Devices retrieved successfully');
+        $data['account'] = $user->account;
+        $data['devices'] = $this->deviceRepository->all();
+        
+        return $this->sendResponse($data, 'User Devices retrieved successfully');
     }
 
 }

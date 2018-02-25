@@ -22,18 +22,18 @@ use Notification;
  * @Resource("/api/deviceFeeds")
  * @Middleware({"cros", "api", "bindings"})
  */
-class DeviceFeedsAPIController extends AppBaseController
-{
+class DeviceFeedsAPIController extends AppBaseController {
+
     /** @var  DeviceFeedsRepository */
     private $deviceFeedsRepository;
-    
+
     /** @var  DeviceRepository */
     private $deviceRepository;
 
     public function __construct(DeviceFeedsRepository $deviceFeedsRepo, DeviceRepository $deviceRepo)
     {
         $this->deviceFeedsRepository = $deviceFeedsRepo;
-        $this->deviceRepository = $deviceRepo;
+        $this->deviceRepository      = $deviceRepo;
     }
 
     /**
@@ -57,36 +57,35 @@ class DeviceFeedsAPIController extends AppBaseController
     {
         logger('reciveThingSpeakData: ', $request->all());
         //$reciveThingSpeakData = $request->all();
-        
+
         $input = $request->all();
-        
+
         $device = $this->deviceRepository->findByField('serial_number', $request->serial_number)->first();
-                
+
         $input['device_id'] = $device->id;
-        
+
         $deviceFeeds = $this->deviceFeedsRepository->create($input);
-        
+
         $this->checkDeviceTemprature($device, $request->temperature);
-        
+
         return $this->sendResponse($deviceFeeds->toArray(), 'Device Feeds saved successfully');
     }
-    
-    private function checkDeviceTemprature(Device $device, $temp) {
+
+    private function checkDeviceTemprature(Device $device, $temp)
+    {
         $deviceCategory = $device->deviceCategory;
-        $users = $device->users;
-        
+        $users          = $device->users;
+
         if ($temp > $deviceCategory->max_temperature) {
-            
+
             Notification::send($users, new TempNotification($device, $temp, true));
-            
+
             logger("(high) Notification sent to users: ", collect($users)->all());
-            
         } else if ($temp < $deviceCategory->min_temperature) {
-            
+
             Notification::send($users, new TempNotification($device, $temp, false));
-            
+
             logger("(low) Notification sent to users: ", collect($users)->all());
-            
         }
     }
 
@@ -144,4 +143,43 @@ class DeviceFeedsAPIController extends AppBaseController
 
         return $this->sendResponse($id, 'Device Feeds deleted successfully');
     }
+
+    /**
+     * @SWG\Get(
+     *   tags={"Device"},
+     *   path="/deviceFeeds/getDeviceHistory/{deviceId}",
+     *   operationId="getDeviceHistory",
+     *   @SWG\Parameter(ref="#/parameters/deviceId"),
+     *   @SWG\Parameter(
+     *     in="query",
+     *     name="startDate",
+     *     description="Start Date of history",
+     *     required=true,
+     *     type="string"
+     *   ),
+     *   @SWG\Parameter(
+     *     in="query",
+     *     name="endDate",
+     *     description="End Date of history",
+     *     required=true,
+     *     type="string"
+     *   ),
+     *   @SWG\Response(response="default", ref="#/responses/deviceHistory")
+     * )
+     * 
+     * @param Device $device
+     * @return Response
+     * @Get("getDeviceHistory/{device}", as="deviceFeeds.getDeviceHistory")
+     */
+    public function getDeviceHistory(Request $request, Device $device)
+    {
+        $data = $device->deviceFeeds()
+                ->whereBetween('created_at', [$request->startDate, $request->endDate])
+                ->get()
+                ->map(function ($item, $key) {
+            return $item->temperature;
+        });
+        return $this->sendResponse($data, 'User Devices retrieved successfully');
+    }
+
 }

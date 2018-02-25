@@ -45,6 +45,16 @@
  * )
  * 
  * @SWG\Parameter(
+ *   parameter="deviceId",
+ *   name="deviceId",
+ *   description="The ID of the device",
+ *   type="integer",
+ *   format="int64",
+ *   in="path",
+ *   required=true
+ * )
+ * 
+ * @SWG\Parameter(
  *   name="search",
  *   in="query",
  *   description="Search Criteria",

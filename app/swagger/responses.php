@@ -37,6 +37,29 @@
  * )
  * 
  * @SWG\Response(
+ *     response="deviceHistory",
+ *     description="successful operation",
+ *     @SWG\Schema(
+ *         type="object",
+ *         @SWG\Property(
+ *             property="success",
+ *             type="boolean"
+ *         ),
+ *         @SWG\Property(
+ *             property="data",
+ *             type="array",
+ *             @SWG\Items(
+ *                 type="integer"
+ *             )
+ *         ),
+ *         @SWG\Property(
+ *             property="message",
+ *             type="string"
+ *         )
+ *     )
+ * )
+ * 
+ * @SWG\Response(
  *     response="SuccessResponse",
  *     description="successful operation",
  *     @SWG\Schema(

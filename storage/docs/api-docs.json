@@ -15,6 +15,38 @@
         "https"
     ],
     "paths": {
+        "/deviceFeeds/getDeviceHistory/{deviceId}": {
+            "get": {
+                "tags": [
+                    "Device"
+                ],
+                "operationId": "getDeviceHistory",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/deviceId"
+                    },
+                    {
+                        "name": "startDate",
+                        "in": "query",
+                        "description": "Start Date of history",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "endDate",
+                        "in": "query",
+                        "description": "End Date of history",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "$ref": "#/responses/deviceHistory"
+                    }
+                }
+            }
+        },
         "/users/save-device-token/{userId}": {
             "put": {
                 "tags": [
@@ -419,6 +451,14 @@
             "type": "integer",
             "format": "int64"
         },
+        "deviceId": {
+            "name": "deviceId",
+            "in": "path",
+            "description": "The ID of the device",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+        },
         "search": {
             "name": "search",
             "in": "query",
@@ -458,6 +498,26 @@
                     },
                     "data": {
                         "type": "object"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "deviceHistory": {
+            "description": "successful operation",
+            "schema": {
+                "properties": {
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        }
                     },
                     "message": {
                         "type": "string"

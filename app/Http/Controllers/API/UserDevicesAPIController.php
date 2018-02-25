@@ -38,17 +38,6 @@ class UserDevicesAPIController extends AppBaseController {
         $this->deviceRepository      = $deviceRepo;
     }
     
-
-    public function setPreferedDevice(Request $request, $userId)
-    {
-        
-    }
-
-    public function getPreferedDevices($userId)
-    {
-        
-    }
-    
     /**
      * @SWG\Get(
      *   tags={"UserDevices"},
@@ -77,7 +66,7 @@ class UserDevicesAPIController extends AppBaseController {
         }
         $userDevices = $this->deviceRepository->all();
         $data['account'] = $user->account;
-        $data['devices'] = $this->deviceRepository->all();
+        $data['devices'] = $this->deviceRepository->all()->toArray();
         
         return $this->sendResponse($data, 'User Devices retrieved successfully');
     }

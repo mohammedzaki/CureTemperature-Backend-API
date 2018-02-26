@@ -27,7 +27,7 @@ class UserDevicesDataTable extends DataTable {
                             return $device->user->name ?: '';
                         })
                         ->addColumn('deviceAccountName', function (UserDevice $device) {
-                            return $device->device->deviceAccount->name ?: '';
+                            return isset($device->device->deviceAccount) ? $device->device->deviceAccount->name : '';
                         })
                         ->addColumn('action', 'user_devices.datatables_actions');
     }

@@ -58,7 +58,7 @@ class UserDevice extends Model
      **/
     public function device()
     {
-        return $this->belongsTo(\App\Models\Device::class);
+        return $this->belongsTo(\App\Models\Device::class, 'device_id')->withTrashed();
     }
 
     /**
@@ -66,6 +66,6 @@ class UserDevice extends Model
      **/
     public function user()
     {
-        return $this->belongsTo(\App\Models\User::class);
+        return $this->belongsTo(\App\Models\User::class, 'user_id')->withTrashed();
     }
 }

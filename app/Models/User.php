@@ -173,7 +173,7 @@ class User extends Authenticatable {
      * */
     public function account()
     {
-        return $this->belongsTo(\App\Models\Account::class, 'account_id');
+        return $this->belongsTo(\App\Models\Account::class, 'account_id')->withTrashed();
     }
 
 }

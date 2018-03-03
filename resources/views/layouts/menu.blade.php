@@ -1,6 +1,6 @@
 
 <li class="{{ Request::is('accounts*') ? 'active' : '' }}">
-    <a href="{!! route('accounts.index') !!}"><i class="fa fa-edit"></i><span>Accounts</span></a>
+    <a href="{!! route('accounts.index') !!}"><i class="fa fa-edit"></i><span>Locations</span></a>
 </li>
 
 <li class="{{ Request::is('users*') ? 'active' : '' }}">

@@ -19,7 +19,6 @@ class UserDevicesDataTable extends DataTable {
         $dataTable = new EloquentDataTable($query);
 
         return $dataTable
-                        ->addColumn('id', 1)
                         ->addColumn('deviceName', function (UserDevice $device) {
                             return $device->device->name ?: '';
                         })

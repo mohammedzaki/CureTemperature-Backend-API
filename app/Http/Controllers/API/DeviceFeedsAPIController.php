@@ -75,18 +75,24 @@ class DeviceFeedsAPIController extends AppBaseController {
     {
         $deviceCategory = $device->deviceCategory;
         $users          = $device->users;
-
+        $device->alarm  = 0;
+        $device->temp = $temp;
+        $device->reverse = ($temp > 0);
+        
         if ($temp > $deviceCategory->max_temperature) {
+            $device->alarm = 1;
 
             Notification::send($users, new TempNotification($device, $temp, true));
 
             logger("(high) Notification sent to users: ", collect($users)->all());
         } else if ($temp < $deviceCategory->min_temperature) {
+            $device->alarm = 1;
 
             Notification::send($users, new TempNotification($device, $temp, false));
 
             logger("(low) Notification sent to users: ", collect($users)->all());
         }
+        $device->save();
     }
 
     /**

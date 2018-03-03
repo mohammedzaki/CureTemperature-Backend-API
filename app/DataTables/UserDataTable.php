@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Repositories\UserRepository;
 use Yajra\DataTables\EloquentDataTable;
 use App\Criteria\AccountFilterCriteria;
+use DB;
 
 class UserDataTable extends MyBaseDataTable {
 
@@ -24,6 +25,7 @@ class UserDataTable extends MyBaseDataTable {
 
         return $dataTable
                         //->addColumn('details', 'users.datatables_details')
+                        //->filterColumn('rownum', 'whereRaw', '@rownum  + 1 like ?', ["%{$keyword}%"])
                         ->addColumn('devices_details_url', function(User $user) {
                             return url("users/{$user->id}/devices");
                         })
@@ -49,7 +51,9 @@ class UserDataTable extends MyBaseDataTable {
             $this->userRepository->pushCriteria(new AccountFilterCriteria($this->account->id));
             return $this->userRepository->getModelForDatatable();
         } else {
-            return $model->newQuery();
+            DB::statement(DB::raw('set @rownum=0'));
+            return $model->select([
+            DB::raw('@rownum  := @rownum  + 1 AS "index"'), 'users.*'])->newQuery();
         }
     }
 
@@ -85,7 +89,8 @@ class UserDataTable extends MyBaseDataTable {
     protected function getColumns()
     {
         return [
-            'id',
+            'index',
+            //'id',
             'name',
             'email',
             'accountName',

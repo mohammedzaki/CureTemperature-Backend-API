@@ -92,6 +92,24 @@
                 }
             }
         },
+        "/users/getUserNotifications/{userId}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "operationId": "getUserNotifications",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/userId"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "$ref": "#/responses/device"
+                    }
+                }
+            }
+        },
         "/userDevices/{userId}": {
             "get": {
                 "tags": [

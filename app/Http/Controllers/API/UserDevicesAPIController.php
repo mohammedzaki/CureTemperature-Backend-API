@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
-use Prettus\Repository\Criteria\RequestCriteria;
 use App\Models\{
     User
 };
@@ -22,7 +21,6 @@ use App\Criteria\{
  * @package App\Http\Controllers\API
  * @Controller(prefix="/api/userDevices")
  * @Middleware({"cros", "api", "bindings"})
- * 
  */
 class UserDevicesAPIController extends AppBaseController {
 
@@ -62,8 +60,10 @@ class UserDevicesAPIController extends AppBaseController {
             $integerIDs = array_map('intval', explode(',', $request->devicesId));
             $this->deviceRepository->pushCriteria(new PreferedDevicesCriteria($integerIDs));
         } else {
-            $this->deviceRepository->pushCriteria(new UserDevicesCriteria($user));
+            //$this->deviceRepository->pushCriteria(new UserDevicesCriteria($user));
         }
+        $this->deviceRepository->pushCriteria(new UserDevicesCriteria($user));
+        //echo $this->deviceRepository->getModelForDatatable();
         $userDevices = $this->deviceRepository->all();
         $data['account'] = $user->account;
         $data['devices'] = $this->deviceRepository->all()->toArray();

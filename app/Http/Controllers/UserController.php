@@ -54,7 +54,9 @@ class UserController extends AppBaseController {
 
     private function setViewData($user = null)
     {
-        $roles    = $this->roleRepository->allForHtmlSelect('display_name');
+        $roles    = $this->roleRepository->findWhereNotIn('id', [1])->mapWithKeys(function ($item) {
+                    return [$item['id'] => $item['display_name']];
+                }); //->allForHtmlSelect('display_name');
         $accounts = $this->accountRepository->allForHtmlSelect();
         return [
             'roles'    => $roles,

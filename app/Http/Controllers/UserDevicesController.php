@@ -124,7 +124,7 @@ class UserDevicesController extends AppBaseController
             return redirect(route('userDevices.index'));
         }
 
-        return view('user_devices.edit')->with('userDevices', $userDevices);
+        return view('user_devices.edit')->with($this->setViewData($userDevices));
     }
 
     /**

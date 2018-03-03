@@ -75,7 +75,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class DeviceCategory extends Model
 {
-    use SoftDeletes;
+    //use SoftDeletes;
 
     public $table = 'device_category';
     

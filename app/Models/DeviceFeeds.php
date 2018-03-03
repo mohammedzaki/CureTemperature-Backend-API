@@ -65,7 +65,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class DeviceFeeds extends Model
 {
-    use SoftDeletes;
+    //use SoftDeletes;
 
     public $table = 'device_feeds';
     

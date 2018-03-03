@@ -100,8 +100,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class User extends Authenticatable {
 
     use HasApiTokens,
-        Notifiable,
-        SoftDeletes;
+        Notifiable;
 
     /**
      * Generated
@@ -173,7 +172,7 @@ class User extends Authenticatable {
      * */
     public function account()
     {
-        return $this->belongsTo(\App\Models\Account::class, 'account_id')->withTrashed();
+        return $this->belongsTo(\App\Models\Account::class, 'account_id');
     }
 
 }

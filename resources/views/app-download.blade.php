@@ -238,6 +238,10 @@
                                         <div class="mu-single-screeshot">
                                             <img src="assets/images/screenshot/05.jpg" alt="App screenshot img">
                                         </div>
+                                        
+                                        <div class="mu-single-screeshot">
+                                            <img src="assets/images/screenshot/06.jpg" alt="App screenshot img">
+                                        </div>
 
                                     </div>
 
@@ -327,13 +331,14 @@
                                                     <p><strong>Phone Number</strong></p>
                                                     <p>Tel: +20 22 690 835</p>
                                                     <p>Fax: +20 22 690 834</p>
+                                                    <p>Mob: +20 012 2 99 444 51</p>
                                                 </div>
 
                                                 <div class="mu-contact-right-single">
                                                     <div class="mu-icon"><i class="fa fa-envelope"></i></div>
                                                     <p><strong>Email Address</strong></p>
                                                     <p>info@curegroup.net</p>
-                                                    <p>ehab.serag@curegroup.net</p>
+                                                    <p>osama.ibrahim@curegroup.net</p>
                                                 </div>
 
                                                 <!--<div class="mu-contact-right-single">
@@ -369,7 +374,7 @@
         <footer id="mu-footer" role="contentinfo">
             <div class="container">
                 <div class="mu-footer-area">
-                    <p class="mu-copy-right">&copy; Copyright <a rel="nofollow" href="http://www.curegroup.net">markups.io</a>. All right reserved.</p>
+                    <p class="mu-copy-right">&copy; Copyright <a rel="nofollow" href="http://www.curegroup.net">curegroup.net</a>. All right reserved.</p>
                 </div>
             </div>
 

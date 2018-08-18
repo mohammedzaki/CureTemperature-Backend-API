@@ -943,7 +943,8 @@ button:focus {
 }
 
 .mu-contact-right-single p{
-	margin-bottom: 0;
+    margin-bottom: 0;
+    margin-left: 70px;
 }
 
 

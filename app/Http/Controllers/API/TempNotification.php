@@ -56,7 +56,7 @@ class TempNotification extends MobileNotification {
 
     public function getSound(): string
     {
-        return "curealarm.wav";
+        return "curealarm";
     }
 
 }

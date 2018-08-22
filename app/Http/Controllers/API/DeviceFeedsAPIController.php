@@ -22,7 +22,8 @@ use Notification;
  * @Resource("/api/deviceFeeds")
  * @Middleware({"cros", "api", "bindings"})
  */
-class DeviceFeedsAPIController extends AppBaseController {
+class DeviceFeedsAPIController extends AppBaseController
+{
 
     /** @var  DeviceFeedsRepository */
     private $deviceFeedsRepository;
@@ -73,20 +74,24 @@ class DeviceFeedsAPIController extends AppBaseController {
 
     private function checkDeviceTemprature(Device $device, $temp)
     {
-        $deviceCategory = $device->deviceCategory;
-        $users          = $device->users;
-        $device->alarm  = 0;
-        $device->temp = $temp;
-        $device->reverse = ($temp < 0);
-        
+        $deviceCategory  = $device->deviceCategory;
+        $users           = $device->users;
+        $device->alarm   = 0;
+        $device->temp    = $temp;
+        $device->reverse = ($temp > 0);
+
         if ($temp > $deviceCategory->max_temperature) {
             $device->alarm = 1;
+
+            $device->percentage = abs(($temp / $deviceCategory->max_temperature) * 100);
 
             Notification::send($users, new TempNotification($device, $temp, true));
 
             logger("(high) Notification sent to users: ", collect($users)->all());
         } else if ($temp < $deviceCategory->min_temperature) {
-            $device->alarm = 1;
+            $device->alarm      = 1;
+            
+            $device->percentage = abs(($temp / $deviceCategory->min_temperature) * 100);
 
             Notification::send($users, new TempNotification($device, $temp, false));
 

@@ -64,6 +64,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $hospital
  * @property string $place
  * @property string $serial_number
+ * @property float $percentage
  * @property int $device_category_id
  * @property \Carbon\Carbon|null $deleted_at
  * @property \Carbon\Carbon|null $created_at

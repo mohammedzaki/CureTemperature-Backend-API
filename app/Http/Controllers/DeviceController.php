@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\DeviceDataTable;
-use App\Http\Requests;
 use App\Http\Requests\CreateDeviceRequest;
 use App\Http\Requests\UpdateDeviceRequest;
 use App\Repositories\{
@@ -15,6 +14,7 @@ use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 use GuzzleHttp\Client;
+use Illuminate\Http\Request;
 
 /**
  * Class DeviceController
@@ -184,10 +184,11 @@ class DeviceController extends AppBaseController
      * @return \Illuminate\Http\Response
      * @Get("sendTestNotification/{id}", as="devices.sendTestNotification")
      */
-    public function sendTestNotification($id)
+    public function sendTestNotification(Request $request, $id)
     {
-        $guzzle   = new Client;
-        
+        $guzzle = new Client;
+        $asHigh = isset($request->asHigh) ? $request->asHigh : true;
+
         $device = $this->deviceRepository->findWithoutFail($id);
 
         if (empty($device)) {
@@ -196,10 +197,13 @@ class DeviceController extends AppBaseController
             return redirect(route('devices.index'));
         }
         $serialNumber = $device->serial_number;
-        $temp = 30;
-        
+        if ($asHigh) {
+            $temp = $device->deviceCategory->max_temperature + rand(3, 20);
+        } else {
+            $temp = $device->deviceCategory->min_temperature - rand(4, 21);
+        }
         $response = $guzzle->get("https://api.thingspeak.com/update?api_key=2ICLU5MQB2KI82MS&field1=90&field2={$temp}&field3={$serialNumber}");
-        
+
         Flash::success('TestNotification sent successfully.');
 
         return redirect(route('devices.index'));

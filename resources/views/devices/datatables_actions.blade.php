@@ -1,7 +1,10 @@
 {!! Form::open(['route' => ['devices.destroy', $id], 'method' => 'delete']) !!}
 <div class='btn-group'>
     <a href="{{ route('devices.sendTestNotification', $id) }}" class='btn btn-default btn-xs'>
-        SendTestNotification
+        SendTestNotificationH
+    </a>
+    <a href="{{ route('devices.sendTestNotification', [$id, 'asHigh' => false]) }}" class='btn btn-default btn-xs'>
+        SendTestNotificationL
     </a>
     <a href="{{ route('devices.show', $id) }}" class='btn btn-default btn-xs'>
         <i class="glyphicon glyphicon-eye-open"></i>

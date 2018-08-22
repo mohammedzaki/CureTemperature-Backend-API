@@ -40,7 +40,7 @@ class TempNotification extends MobileNotification {
 
     public function getMessage(): string
     {
-        $message = "Device ({$this->device->name} - {$this->device->serial_number}) temperature is ";
+        $message = "Device ({$this->device->name} - {$this->device->serial_number}) temperature ({$this->temp}) is ";
         if ($this->isHigh == true) {
             $message .= "high";
         } else {

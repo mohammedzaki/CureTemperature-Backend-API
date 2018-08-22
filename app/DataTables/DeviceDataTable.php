@@ -74,7 +74,7 @@ class DeviceDataTable extends DataTable {
         return $this->builder()
                         ->columns($this->getColumns())
                         ->minifiedAjax()
-                        ->addAction(['width' => '200px'])
+                        ->addAction(['width' => '360px'])
                         ->parameters([
                             'dom'     => 'Bfrtip',
                             'order'   => [[0, 'desc']],

@@ -68,7 +68,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Carbon\Carbon|null $deleted_at
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at 
- * @property-read \App\Models\DeviceCategory|null $deviceCategory
+ * @property-read \App\Models\DeviceCategory $deviceCategory
  * @property-read \App\Models\Account|null $deviceAccount
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\DeviceFeeds[] $deviceFeeds
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\UserDevice[] $userDevices

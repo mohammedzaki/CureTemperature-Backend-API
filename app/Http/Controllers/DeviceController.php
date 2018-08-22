@@ -14,6 +14,7 @@ use App\Repositories\{
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
+use GuzzleHttp\Client;
 
 /**
  * Class DeviceController
@@ -22,7 +23,8 @@ use Response;
  * @Resource("/devices")
  * @Middleware({"cros", "web", "auth", "bindings"})
  */
-class DeviceController extends AppBaseController {
+class DeviceController extends AppBaseController
+{
 
     /** @var  DeviceRepository */
     private $deviceRepository;
@@ -34,7 +36,7 @@ class DeviceController extends AppBaseController {
     {
         $this->deviceRepository         = $deviceRepo;
         $this->deviceCategoryRepository = $deviceCategoryRepo;
-        $this->accountRepository = $accountRepo;
+        $this->accountRepository        = $accountRepo;
     }
 
     /**
@@ -172,6 +174,33 @@ class DeviceController extends AppBaseController {
         $this->deviceRepository->delete($id);
 
         Flash::success('Device deleted successfully.');
+
+        return redirect(route('devices.index'));
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     * @Get("sendTestNotification/{id}", as="devices.sendTestNotification")
+     */
+    public function sendTestNotification($id)
+    {
+        $guzzle   = new Client;
+        
+        $device = $this->deviceRepository->findWithoutFail($id);
+
+        if (empty($device)) {
+            Flash::error('Device not found');
+
+            return redirect(route('devices.index'));
+        }
+        $serialNumber = $device->serial_number;
+        $temp = 30;
+        
+        $response = $guzzle->get("https://api.thingspeak.com/update?api_key=2ICLU5MQB2KI82MS&field1=90&field2={$temp}&field3={$serialNumber}");
+        
+        Flash::success('TestNotification sent successfully.');
 
         return redirect(route('devices.index'));
     }

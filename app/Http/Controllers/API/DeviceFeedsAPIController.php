@@ -83,7 +83,7 @@ class DeviceFeedsAPIController extends AppBaseController
         if ($temp > $deviceCategory->max_temperature) {
             $device->alarm = 1;
 
-            $device->percentage = ($temp / $deviceCategory->max_temperature) * 100;
+            $device->percentage = abs(($temp / $deviceCategory->max_temperature) * 100);
 
             Notification::send($users, new TempNotification($device, $temp, true));
 
@@ -91,7 +91,7 @@ class DeviceFeedsAPIController extends AppBaseController
         } else if ($temp < $deviceCategory->min_temperature) {
             $device->alarm      = 1;
             
-            $device->percentage = ($temp / $deviceCategory->min_temperature) * 100;
+            $device->percentage = abs(($temp / $deviceCategory->min_temperature) * 100);
 
             Notification::send($users, new TempNotification($device, $temp, false));
 

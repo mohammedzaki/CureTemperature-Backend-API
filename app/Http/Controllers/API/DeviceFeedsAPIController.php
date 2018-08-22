@@ -97,7 +97,7 @@ class DeviceFeedsAPIController extends AppBaseController
 
             logger("(low) Notification sent to users: ", collect($users)->all());
         }
-        $device->save();
+        $device->update();
     }
 
     /**

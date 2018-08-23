@@ -78,7 +78,7 @@ class DeviceFeedsAPIController extends AppBaseController
         $users           = $device->users;
         $device->alarm   = 0;
         $device->temp    = $temp;
-        $device->reverse = ($temp > 0);
+        $device->reverse = ($temp < 0);
 
         if ($temp > $deviceCategory->max_temperature) {
             $device->alarm = 1;

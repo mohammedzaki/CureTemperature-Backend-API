@@ -180,11 +180,14 @@ class DeviceFeedsAPIController extends AppBaseController
      */
     public function getDeviceHistory(Request $request, Device $device)
     {
-        $data = $device->deviceFeeds()
+        $result = $device->deviceFeeds()
                 ->whereBetween('created_at', [$request->startDate, $request->endDate])
-                ->get()
-                ->map(function ($item, $key) {
+                ->get();
+        $data['history'] = $result->map(function ($item) {
             return $item->temperature;
+        });
+        $data['dates'] = $result->map(function ($item) {
+            return $item->created_at->format('d-M H:i');
         });
         return $this->sendResponse($data, 'User Devices retrieved successfully');
     }

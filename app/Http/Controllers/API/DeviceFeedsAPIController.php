@@ -14,6 +14,7 @@ use App\Repositories\DeviceRepository;
 use App\Models\Device;
 use Response;
 use Notification;
+use Carbon\Carbon;
 
 /**
  * Class DeviceFeedsController
@@ -183,10 +184,10 @@ class DeviceFeedsAPIController extends AppBaseController
         $result = $device->deviceFeeds()
                 ->whereBetween('created_at', [$request->startDate, $request->endDate])
                 ->get();
-        $data['history'] = $result->map(function ($item) {
-            return ['t' => $item->created_at->valueOf(), 'y' => $item->temperature];
+        $data['tempHistory'] = $result->map(function ($item) {
+            return ['t' => Carbon::parse($item->created_at)->valueOf(), 'y' => $item->temperature];
         });
-        $data['dates'] = $result->map(function ($item) {
+        $data['dateLables'] = $result->map(function ($item) {
             return $item->created_at->format('M-d H:i');
         });
         return $this->sendResponse($data, 'User Devices retrieved successfully');

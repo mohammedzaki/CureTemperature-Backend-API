@@ -184,10 +184,10 @@ class DeviceFeedsAPIController extends AppBaseController
                 ->whereBetween('created_at', [$request->startDate, $request->endDate])
                 ->get();
         $data['history'] = $result->map(function ($item) {
-            return $item->temperature;
+            return ['t' => $item->created_at->timestamp, 'y' => $item->temperature];
         });
         $data['dates'] = $result->map(function ($item) {
-            return $item->created_at;//->format('M d y H:i:s');
+            return $item->created_at->format('M-d H:i');
         });
         return $this->sendResponse($data, 'User Devices retrieved successfully');
     }

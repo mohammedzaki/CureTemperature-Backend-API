@@ -187,7 +187,7 @@ class DeviceFeedsAPIController extends AppBaseController
             return $item->temperature;
         });
         $data['dates'] = $result->map(function ($item) {
-            return $item->created_at->format('d-M H:i');
+            return $item->created_at;//->format('M d y H:i:s');
         });
         return $this->sendResponse($data, 'User Devices retrieved successfully');
     }

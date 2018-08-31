@@ -19,17 +19,19 @@
         "infyomlabs/generator-builder": "dev-master",
         "infyomlabs/laravel-generator": "5.5.x-dev",
         "infyomlabs/swagger-generator": "dev-master",
-        "laravel/framework": "5.6.*",
+        "laravel/framework": "5.5.*",
         "laravel/passport": "^4.0",
         "laravel/tinker": "~1.0",
-        "laravelcollective/annotations": "5.5.0",
+        "laravelcollective/annotations": "^5",
         "laravelcollective/html": "^5.4",
         "league/fractal": "^0.17.0",
         "sentry/sentry-laravel": "^0.8.0",
         "yajra/laravel-datatables-buttons": "^3.0",
         "yajra/laravel-datatables-oracle": "~8.0",
         "zircote/swagger-php": "^2.0",
-        "zizaco/entrust": "5.2.x-dev"
+        "zizaco/entrust": "5.2.x-dev",
+        "nesbot/carbon": "2.0.0-beta.4 as 1.25.0",
+        "kylekatarnls/laravel-carbon-2": "^1.0.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.0",
@@ -76,11 +78,5 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "optimize-autoloader": true
-    },
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/mohammedzaki/annotations.git"
-        }
-    ]
+    }
 }

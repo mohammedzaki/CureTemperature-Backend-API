@@ -184,7 +184,7 @@ class DeviceFeedsAPIController extends AppBaseController
                 ->whereBetween('created_at', [$request->startDate, $request->endDate])
                 ->get();
         $data['history'] = $result->map(function ($item) {
-            return ['t' => $item->created_at->timestamp, 'y' => $item->temperature];
+            return ['t' => $item->created_at->valueOf(), 'y' => $item->temperature];
         });
         $data['dates'] = $result->map(function ($item) {
             return $item->created_at->format('M-d H:i');

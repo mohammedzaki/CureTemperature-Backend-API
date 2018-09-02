@@ -16,7 +16,8 @@ use App\Models\Device;
  *
  * @author Mohammed Zaki mohammedzaki.dev@gmail.com
  */
-class TempNotification extends MobileNotification {
+class TempNotification extends MobileNotification
+{
 
     /** @var Device */
     private $device;
@@ -27,14 +28,15 @@ class TempNotification extends MobileNotification {
     {
         $this->device = $device;
         $this->isHigh = $isHigh;
-        $this->temp = $temp;
+        $this->temp   = $temp;
     }
 
     //put your code here
     public function getExtraData(): array
     {
-        $data = $this->device->toArray();
-        $data['temp'] = $this->temp;
+        $data                      = $this->device->toArray();
+        $data['temp']              = $this->temp;
+        $data['tempServerMessage'] = $this->getMessage();
         return $data;
     }
 
